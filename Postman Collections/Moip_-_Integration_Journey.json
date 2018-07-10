@@ -18,7 +18,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "3e288230-611b-4412-80db-448f467d492e",
+                "id": "a1f390fe-6cef-4ee1-a531-cba9397a92ca",
                 "type": "text/javascript",
                 "exec": [
                   "tests[\"Status code is 201\"] = responseCode.code === 201;",
@@ -27,7 +27,7 @@
                   "postman.setEnvironmentVariable(\"app_id\", jsonData.id);",
                   "postman.setEnvironmentVariable(\"app_accessToken\", jsonData.accessToken);",
                   "postman.setEnvironmentVariable(\"app_secret\", jsonData.secret);",
-                  "postman.setEnvironmentVariable(\"app_website\", jsonData.website);"
+                  "postman.setEnvironmentVariable(\"app_redirect_uri\", jsonData.redirectUri);"
                 ]
               }
             }
