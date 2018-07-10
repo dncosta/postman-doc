@@ -2903,7 +2903,8 @@
               "mode": "raw",
               "raw": "{\n  \"fundingInstrument\": {\n    \"method\": \"WALLET\",\n    \"wallet\": {\n      \"moipAccount\": {\n        \"id\": \"MPA-LKFH4CH8PX0T\"\n      }\n    }\n  }\n}"
             },
-            "url": "{{url}}/v2/orders/{{order_id}}/payments"
+            "url": "{{url}}/v2/orders/{{order_id}}/payments",
+            "description": "Once you have the 2FA-token you can finally create the payment by informing the `fundingInstrument.wallet` as shown in this example.\nThe 2FA token must be included in the headers as the parameter `customer-2fa` and the token type must be deblared in the parameter `customer-2fa-type` with the values `sms` or `token`."
           },
           "response": [
             {
