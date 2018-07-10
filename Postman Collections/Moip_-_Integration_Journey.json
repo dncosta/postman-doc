@@ -2508,134 +2508,6 @@
           ]
         },
         {
-          "_postman_id": "e5981cc6-38d0-4835-be7a-fbf405ed0616",
-          "name": "Create a wallet payment (APP authentication)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "tests[\"Status code is 201\"] = responseCode.code === 201;",
-                  "",
-                  "var jsonData = JSON.parse(responseBody);",
-                  "postman.setEnvironmentVariable(\"payment_id\", jsonData.id);"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "OAuth {{app_accessToken}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{  \r\n    \"fundingInstrument\": {\r\n        \"method\": \"BOLETO\",\r\n        \"boleto\": {\r\n            \"expirationDate\": \"2020-09-30\",\r\n            \"instructionLines\": {\r\n                \"first\": \"TESTETETSTTTST\",\r\n                \"second\": \"tfcsddlksjsd\",\r\n                \"third\": \"lkshglashiuahgha\"\r\n            },\r\n            \"logoUri\": \"http://\"\r\n        }\r\n    }\r\n}"
-            },
-            "url": "{{url}}/v2/orders/{{order_id}}/payments"
-          },
-          "response": [
-            {
-              "id": "b7e83eb2-e8af-4566-9667-3f352222bea9",
-              "name": "Example",
-              "originalRequest": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  },
-                  {
-                    "key": "Authorization",
-                    "value": "OAuth {{app_accessToken}}"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{  \r\n    \"fundingInstrument\": {\r\n        \"method\": \"BOLETO\",\r\n        \"boleto\": {\r\n            \"expirationDate\": \"2020-09-30\",\r\n            \"instructionLines\": {\r\n                \"first\": \"TESTETETSTTTST\",\r\n                \"second\": \"tfcsddlksjsd\",\r\n                \"third\": \"lkshglashiuahgha\"\r\n            },\r\n            \"logoUri\": \"http://\"\r\n        }\r\n    }\r\n}"
-                },
-                "url": "{{url}}/v2/orders/{{order_id}}/payments"
-              },
-              "status": "Created",
-              "code": 201,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "description": "",
-                  "key": "Connection",
-                  "name": "Connection",
-                  "value": "Keep-Alive"
-                },
-                {
-                  "description": "",
-                  "key": "Content-Length",
-                  "name": "Content-Length",
-                  "value": "1420"
-                },
-                {
-                  "description": "",
-                  "key": "Date",
-                  "name": "Date",
-                  "value": "Thu, 05 Oct 2017 22:19:08 GMT"
-                },
-                {
-                  "description": "",
-                  "key": "Keep-Alive",
-                  "name": "Keep-Alive",
-                  "value": "timeout=2, max=999"
-                },
-                {
-                  "description": "",
-                  "key": "Server",
-                  "name": "Server",
-                  "value": "Apache"
-                },
-                {
-                  "description": "",
-                  "key": "Status",
-                  "name": "Status",
-                  "value": "201 Created"
-                },
-                {
-                  "description": "",
-                  "key": "Vary",
-                  "name": "Vary",
-                  "value": "Accept-Encoding,Origin"
-                },
-                {
-                  "description": "",
-                  "key": "X-Content-Type-Options",
-                  "name": "X-Content-Type-Options",
-                  "value": "nosniff"
-                },
-                {
-                  "description": "",
-                  "key": "content-type",
-                  "name": "content-type",
-                  "value": "application/json"
-                },
-                {
-                  "description": "",
-                  "key": "x-newrelic-app-data",
-                  "name": "x-newrelic-app-data",
-                  "value": "PxQFUlBXAQoTUVFWDgEDUVYTGhE1AwE2QgNWEVlbQFtcC2VOYwRAFjNTVTIDEU5aUwE9TUEDa0kLQ1JWEBU/TUsNSgZdSn1WTjkWEVAYXgcKQkRBTjN3YGRNQ04HHwdKVB8FAFdXVVcAVxRRDgwYEAFTAFEAWAtXXA8GWVBQAVcSSAcDW0JSOw=="
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": "{\"id\":\"PAY-5XMNS6OUL818\",\"status\":\"WAITING\",\"delayCapture\":false,\"amount\":{\"total\":2000,\"gross\":2000,\"fees\":0,\"refunds\":0,\"liquid\":2000,\"currency\":\"BRL\"},\"installmentCount\":1,\"fundingInstrument\":{\"boleto\":{\"expirationDate\":\"2020-09-30\",\"lineCode\":\"00190.00009 01014.051005 00000.787176 7 72370000001000\",\"logoUri\":\"http://\",\"instructionLines\":{\"first\":\"TESTETETSTTTST\",\"second\":\"tfcsddlksjsd\",\"third\":\"lkshglashiuahgha\"}},\"method\":\"BOLETO\"},\"fees\":[{\"type\":\"TRANSACTION\",\"amount\":0}],\"events\":[{\"type\":\"PAYMENT.CREATED\",\"createdAt\":\"2017-10-05T19:19:08.543-03\"},{\"type\":\"PAYMENT.WAITING\",\"createdAt\":\"2017-10-05T19:19:08.543-03\"}],\"receivers\":[{\"moipAccount\":{\"id\":\"MPA-LKFH4CH8PX0T\",\"login\":\"akuma@labs.moip.com.br\",\"fullname\":\"Akuma Silva\"},\"type\":\"PRIMARY\",\"amount\":{\"total\":1000,\"refunds\":0}},{\"moipAccount\":{\"id\":\"MPA-DB7193368140\",\"login\":\"1507241775@myemail.com\",\"fullname\":\"Sales Machine da Silva\"},\"type\":\"SECONDARY\",\"amount\":{\"total\":1000,\"fees\":0,\"refunds\":0},\"feePayor\":false}],\"_links\":{\"self\":{\"href\":\"https://sandbox.moip.com.br/v2/payments/PAY-5XMNS6OUL818\"},\"order\":{\"href\":\"https://sandbox.moip.com.br/v2/orders/ORD-4D4LA4SHR4HG\",\"title\":\"ORD-4D4LA4SHR4HG\"},\"payBoleto\":{\"printHref\":\"https://sandbox.moip.com.br/v2/boleto/BOL-MI2BKKAVPB5P/print\",\"redirectHref\":\"https://sandbox.moip.com.br/v2/boleto/BOL-MI2BKKAVPB5P\"}},\"createdAt\":\"2017-10-05T19:19:08.540-03\",\"updatedAt\":\"2017-10-05T19:19:08.540-03\"}"
-            }
-          ]
-        },
-        {
           "_postman_id": "3befc1d4-3a62-4ec2-8869-5b71337f3990",
           "name": "Create 3rd order (APP authentication) Copy",
           "event": [
@@ -2760,6 +2632,134 @@
               "cookie": [],
               "responseTime": null,
               "body": "{\"id\":\"ORD-4D4LA4SHR4HG\",\"ownId\":\"1507241946\",\"status\":\"CREATED\",\"platform\":\"V2\",\"createdAt\":\"2017-10-05T19:19:06.208-03\",\"updatedAt\":\"2017-10-05T19:19:06.208-03\",\"amount\":{\"paid\":0,\"total\":2000,\"fees\":0,\"refunds\":0,\"liquid\":0,\"otherReceivers\":1000,\"currency\":\"BRL\",\"subtotals\":{\"shipping\":0,\"addition\":0,\"discount\":0,\"items\":2000}},\"items\":[{\"product\":\"Bicicleta Specialized Tarmac 26 Shimano Alivio\",\"price\":2000,\"detail\":\"uma linda bicicleta\",\"quantity\":1}],\"customer\":{\"id\":\"CUS-MXI6RGN10FZR\",\"ownId\":\"1507241946\",\"fullname\":\"Jose Silva\",\"createdAt\":\"2017-10-05T19:19:06.220-03\",\"birthDate\":\"1988-12-30\",\"email\":\"1507241946@email.com\",\"phone\":{\"countryCode\":\"55\",\"areaCode\":\"11\",\"number\":\"66778899\"},\"taxDocument\":{\"type\":\"CPF\",\"number\":\"22222222222\"},\"shippingAddress\":{\"zipCode\":\"01234000\",\"street\":\"Avenida Faria Lima\",\"streetNumber\":\"2927\",\"complement\":\"8\",\"city\":\"Sao Paulo\",\"district\":\"Itaim\",\"state\":\"SP\",\"country\":\"BRA\"},\"moipAccount\":{\"id\":\"MPA-PQ0H8UZYNNWY\"},\"_links\":{\"self\":{\"href\":\"https://sandbox.moip.com.br/v2/customers/CUS-MXI6RGN10FZR\"},\"hostedAccount\":{\"redirectHref\":\"https://hostedaccount-sandbox.moip.com.br?token=a9692832-b5bd-41d2-b8f1-c5041bfc9740&id=CUS-MXI6RGN10FZR&mpa=MPA-LKFH4CH8PX0T\"}}},\"payments\":[],\"escrows\":[],\"refunds\":[],\"entries\":[],\"events\":[{\"type\":\"ORDER.CREATED\",\"createdAt\":\"2017-10-05T19:19:06.208-03\",\"description\":\"\"}],\"receivers\":[{\"moipAccount\":{\"id\":\"MPA-LKFH4CH8PX0T\",\"login\":\"akuma@labs.moip.com.br\",\"fullname\":\"Akuma Silva\"},\"type\":\"PRIMARY\",\"amount\":{\"total\":1000,\"fees\":0,\"refunds\":0},\"feePayor\":true},{\"moipAccount\":{\"id\":\"MPA-DB7193368140\",\"login\":\"1507241775@myemail.com\",\"fullname\":\"Sales Machine da Silva\"},\"type\":\"SECONDARY\",\"amount\":{\"total\":1000,\"fees\":0,\"refunds\":0},\"feePayor\":false}],\"shippingAddress\":{\"zipCode\":\"01234000\",\"street\":\"Avenida Faria Lima\",\"streetNumber\":\"2927\",\"complement\":\"8\",\"city\":\"Sao Paulo\",\"district\":\"Itaim\",\"state\":\"SP\",\"country\":\"BRA\"},\"_links\":{\"self\":{\"href\":\"https://sandbox.moip.com.br/v2/orders/ORD-4D4LA4SHR4HG\"},\"checkout\":{\"payCheckout\":{\"redirectHref\":\"https://checkout-new-sandbox.moip.com.br?token=53280abe-624d-4280-b6ed-d62a8735d9fa&id=ORD-4D4LA4SHR4HG\"},\"payCreditCard\":{\"redirectHref\":\"https://checkout-new-sandbox.moip.com.br?token=53280abe-624d-4280-b6ed-d62a8735d9fa&id=ORD-4D4LA4SHR4HG&payment-method=credit-card\"},\"payBoleto\":{\"redirectHref\":\"https://checkout-new-sandbox.moip.com.br?token=53280abe-624d-4280-b6ed-d62a8735d9fa&id=ORD-4D4LA4SHR4HG&payment-method=boleto\"},\"payOnlineBankDebitItau\":{\"redirectHref\":\"https://checkout-sandbox.moip.com.br/debit/itau/ORD-4D4LA4SHR4HG\"}}}}"
+            }
+          ]
+        },
+        {
+          "_postman_id": "e5981cc6-38d0-4835-be7a-fbf405ed0616",
+          "name": "Create a wallet payment (APP authentication)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "tests[\"Status code is 201\"] = responseCode.code === 201;",
+                  "",
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"payment_id\", jsonData.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "OAuth {{app_accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n    \"fundingInstrument\": {\r\n        \"method\": \"BOLETO\",\r\n        \"boleto\": {\r\n            \"expirationDate\": \"2020-09-30\",\r\n            \"instructionLines\": {\r\n                \"first\": \"TESTETETSTTTST\",\r\n                \"second\": \"tfcsddlksjsd\",\r\n                \"third\": \"lkshglashiuahgha\"\r\n            },\r\n            \"logoUri\": \"http://\"\r\n        }\r\n    }\r\n}"
+            },
+            "url": "{{url}}/v2/orders/{{order_id}}/payments"
+          },
+          "response": [
+            {
+              "id": "b7e83eb2-e8af-4566-9667-3f352222bea9",
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "OAuth {{app_accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n    \"fundingInstrument\": {\r\n        \"method\": \"BOLETO\",\r\n        \"boleto\": {\r\n            \"expirationDate\": \"2020-09-30\",\r\n            \"instructionLines\": {\r\n                \"first\": \"TESTETETSTTTST\",\r\n                \"second\": \"tfcsddlksjsd\",\r\n                \"third\": \"lkshglashiuahgha\"\r\n            },\r\n            \"logoUri\": \"http://\"\r\n        }\r\n    }\r\n}"
+                },
+                "url": "{{url}}/v2/orders/{{order_id}}/payments"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "description": "",
+                  "key": "Connection",
+                  "name": "Connection",
+                  "value": "Keep-Alive"
+                },
+                {
+                  "description": "",
+                  "key": "Content-Length",
+                  "name": "Content-Length",
+                  "value": "1420"
+                },
+                {
+                  "description": "",
+                  "key": "Date",
+                  "name": "Date",
+                  "value": "Thu, 05 Oct 2017 22:19:08 GMT"
+                },
+                {
+                  "description": "",
+                  "key": "Keep-Alive",
+                  "name": "Keep-Alive",
+                  "value": "timeout=2, max=999"
+                },
+                {
+                  "description": "",
+                  "key": "Server",
+                  "name": "Server",
+                  "value": "Apache"
+                },
+                {
+                  "description": "",
+                  "key": "Status",
+                  "name": "Status",
+                  "value": "201 Created"
+                },
+                {
+                  "description": "",
+                  "key": "Vary",
+                  "name": "Vary",
+                  "value": "Accept-Encoding,Origin"
+                },
+                {
+                  "description": "",
+                  "key": "X-Content-Type-Options",
+                  "name": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "description": "",
+                  "key": "content-type",
+                  "name": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "description": "",
+                  "key": "x-newrelic-app-data",
+                  "name": "x-newrelic-app-data",
+                  "value": "PxQFUlBXAQoTUVFWDgEDUVYTGhE1AwE2QgNWEVlbQFtcC2VOYwRAFjNTVTIDEU5aUwE9TUEDa0kLQ1JWEBU/TUsNSgZdSn1WTjkWEVAYXgcKQkRBTjN3YGRNQ04HHwdKVB8FAFdXVVcAVxRRDgwYEAFTAFEAWAtXXA8GWVBQAVcSSAcDW0JSOw=="
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\"id\":\"PAY-5XMNS6OUL818\",\"status\":\"WAITING\",\"delayCapture\":false,\"amount\":{\"total\":2000,\"gross\":2000,\"fees\":0,\"refunds\":0,\"liquid\":2000,\"currency\":\"BRL\"},\"installmentCount\":1,\"fundingInstrument\":{\"boleto\":{\"expirationDate\":\"2020-09-30\",\"lineCode\":\"00190.00009 01014.051005 00000.787176 7 72370000001000\",\"logoUri\":\"http://\",\"instructionLines\":{\"first\":\"TESTETETSTTTST\",\"second\":\"tfcsddlksjsd\",\"third\":\"lkshglashiuahgha\"}},\"method\":\"BOLETO\"},\"fees\":[{\"type\":\"TRANSACTION\",\"amount\":0}],\"events\":[{\"type\":\"PAYMENT.CREATED\",\"createdAt\":\"2017-10-05T19:19:08.543-03\"},{\"type\":\"PAYMENT.WAITING\",\"createdAt\":\"2017-10-05T19:19:08.543-03\"}],\"receivers\":[{\"moipAccount\":{\"id\":\"MPA-LKFH4CH8PX0T\",\"login\":\"akuma@labs.moip.com.br\",\"fullname\":\"Akuma Silva\"},\"type\":\"PRIMARY\",\"amount\":{\"total\":1000,\"refunds\":0}},{\"moipAccount\":{\"id\":\"MPA-DB7193368140\",\"login\":\"1507241775@myemail.com\",\"fullname\":\"Sales Machine da Silva\"},\"type\":\"SECONDARY\",\"amount\":{\"total\":1000,\"fees\":0,\"refunds\":0},\"feePayor\":false}],\"_links\":{\"self\":{\"href\":\"https://sandbox.moip.com.br/v2/payments/PAY-5XMNS6OUL818\"},\"order\":{\"href\":\"https://sandbox.moip.com.br/v2/orders/ORD-4D4LA4SHR4HG\",\"title\":\"ORD-4D4LA4SHR4HG\"},\"payBoleto\":{\"printHref\":\"https://sandbox.moip.com.br/v2/boleto/BOL-MI2BKKAVPB5P/print\",\"redirectHref\":\"https://sandbox.moip.com.br/v2/boleto/BOL-MI2BKKAVPB5P\"}},\"createdAt\":\"2017-10-05T19:19:08.540-03\",\"updatedAt\":\"2017-10-05T19:19:08.540-03\"}"
             }
           ]
         }
