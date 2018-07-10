@@ -18,6 +18,7 @@
             {
               "listen": "test",
               "script": {
+                "id": "3e288230-611b-4412-80db-448f467d492e",
                 "type": "text/javascript",
                 "exec": [
                   "tests[\"Status code is 201\"] = responseCode.code === 201;",
@@ -25,7 +26,8 @@
                   "var jsonData = JSON.parse(responseBody);",
                   "postman.setEnvironmentVariable(\"app_id\", jsonData.id);",
                   "postman.setEnvironmentVariable(\"app_accessToken\", jsonData.accessToken);",
-                  "postman.setEnvironmentVariable(\"app_secret\", jsonData.secret);"
+                  "postman.setEnvironmentVariable(\"app_secret\", jsonData.secret);",
+                  "postman.setEnvironmentVariable(\"app_website\", jsonData.website);"
                 ]
               }
             }
