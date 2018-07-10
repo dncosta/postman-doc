@@ -2541,7 +2541,7 @@
               "raw": "{\n\t\"type\": \"sms\"\n}"
             },
             "url": "{{url}}/tfa/tokens/counters",
-            "description": "This request sends an SMS token to the mobile number of the payour Moip Account."
+            "description": "This request sends an SMS token to the mobile number of the payour Moip Account, which is authenticating through an OAuth permission."
           },
           "response": [
             {
