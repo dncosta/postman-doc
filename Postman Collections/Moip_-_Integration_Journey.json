@@ -2509,7 +2509,7 @@
         },
         {
           "_postman_id": "3befc1d4-3a62-4ec2-8869-5b71337f3990",
-          "name": "Request SMS token",
+          "name": "Send SMS token to payor",
           "event": [
             {
               "listen": "test",
@@ -2540,7 +2540,8 @@
               "mode": "raw",
               "raw": "{\r\n    \"ownId\": \"{{$timestamp}}\",\r\n    \"amount\": {\r\n        \"currency\": \"BRL\"\r\n    },\r\n    \"items\": [\r\n        {\r\n            \"product\": \"Bicicleta Specialized Tarmac 26 Shimano Alivio\",\r\n            \"quantity\": 1,\r\n            \"detail\": \"uma linda bicicleta\",\r\n            \"price\": 2000\r\n        }\r\n    ],\r\n    \"customer\": {\r\n        \"ownId\": \"{{$timestamp}}\",\r\n        \"fullname\": \"Jose Silva\",\r\n        \"email\": \"{{$timestamp}}@email.com\",\r\n        \"birthDate\": \"1988-12-30\",\r\n        \"taxDocument\": {\r\n            \"type\": \"CPF\",\r\n            \"number\": \"22222222222\"\r\n        },\r\n        \"phone\": {\r\n            \"countryCode\": \"55\",\r\n            \"areaCode\": \"11\",\r\n            \"number\": \"66778899\"\r\n        },\r\n        \"shippingAddress\":   {\r\n                \"street\": \"Avenida Faria Lima\",\r\n                \"streetNumber\": 2927,\r\n                \"complement\": 8,\r\n                \"district\": \"Itaim\",\r\n                \"city\": \"Sao Paulo\",\r\n                \"state\": \"SP\",\r\n                \"country\": \"BRA\",\r\n                \"zipCode\": \"01234000\"\r\n            }\r\n    },\r\n    \"receivers\": [\r\n        {\r\n            \"moipAccount\": {\r\n                \"id\": \"{{cmerchant_id}}\"\r\n            },\r\n            \"type\": \"SECONDARY\",\r\n            \"amount\": {\r\n                \"percentual\": 50\r\n            }\r\n        }\r\n    ]\r\n}"
             },
-            "url": "{{url}}/v2/orders/"
+            "url": "{{url}}/v2/orders/",
+            "description": "This request sends an SMS token to the mobile number of the payour Moip Account."
           },
           "response": [
             {
