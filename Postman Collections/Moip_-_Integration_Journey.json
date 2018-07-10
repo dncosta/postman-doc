@@ -604,13 +604,13 @@
               "urlencoded": [
                 {
                   "key": "client_id",
-                  "value": "",
+                  "value": "{{app_id}}",
                   "description": "",
                   "type": "text"
                 },
                 {
                   "key": "client_secret",
-                  "value": "",
+                  "value": "{{app_secret}}",
                   "description": "",
                   "type": "text"
                 },
