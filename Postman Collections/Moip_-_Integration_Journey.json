@@ -606,32 +606,32 @@
               "mode": "urlencoded",
               "urlencoded": [
                 {
-                  "key": "client_id",
-                  "value": "{{app_id}}:",
+                  "key": "client_id={{app_id}}",
+                  "value": "",
                   "type": "text",
                   "description": ""
                 },
                 {
-                  "key": "client_secret",
-                  "value": "{{app_secret}}:",
+                  "key": "client_secret={{app_secret}}",
+                  "value": "",
                   "type": "text",
                   "description": ""
                 },
                 {
-                  "key": "redirect_uri",
-                  "value": "{{app_redirect_uri}}:",
+                  "key": "redirect_uri={{app_redirect_uri}}",
+                  "value": "",
                   "type": "text",
                   "description": ""
                 },
                 {
-                  "key": "grant_type",
-                  "value": "authorization_code:",
+                  "key": "grant_type=authorization_code",
+                  "value": "",
                   "type": "text",
                   "description": ""
                 },
                 {
-                  "key": "code",
-                  "value": "1ecec5a6a9a7a612cdeeac5ff043e4389259f717:",
+                  "key": "code=1ecec5a6a9a7a612cdeeac5ff043e4389259f717",
+                  "value": "",
                   "type": "text",
                   "description": ""
                 }
