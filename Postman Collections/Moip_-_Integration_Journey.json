@@ -2509,7 +2509,7 @@
         },
         {
           "_postman_id": "3befc1d4-3a62-4ec2-8869-5b71337f3990",
-          "name": "Create 3rd order (APP authentication) Copy",
+          "name": "Request SMS token",
           "event": [
             {
               "listen": "test",
