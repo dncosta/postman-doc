@@ -601,9 +601,9 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"transparentAccount\": false,\r\n  \"email\": {\r\n    \"address\": \"{{$timestamp}}@myemail.com\"\r\n  },\r\n  \"person\": {\r\n    \"name\": \"Sales Machine da Silva\",\r\n    \"taxDocument\": {\r\n      \"type\": \"CPF\",\r\n      \"number\": \"{{c_cpf}}\"\r\n    },\r\n    \"birthDate\": \"1994-03-01\",\r\n    \"phone\": {\r\n      \"countryCode\": \"55\",\r\n      \"areaCode\": \"11\",\r\n      \"number\": \"77121055\"\r\n    },\r\n    \"address\": {\r\n      \"street\": \"Av. Brigadeiro Faria de Lima\",\r\n      \"streetNumber\": \"195\",\r\n      \"district\": \"Financial District\",\r\n      \"zipcode\": \"79031-100\",\r\n      \"city\": \"S\u00e3o Paulo\",\r\n      \"state\": \"SP\",\r\n      \"country\": \"BRA\"\r\n    }\r\n  },\r\n  \"type\": \"MERCHANT\"\r\n}"
+              "raw": ""
             },
-            "url": "{{url}}/v2/accounts/",
+            "url": "{{url}}/v2/oauth/token",
             "description": "Having a Classical Moip account means that the owner of that account can manage its sales in Moip environment.\nHowever, a marketplace can embeed the whole management experience including transfers and payout if it has the right OAuth permissions.\n"
           },
           "response": [
