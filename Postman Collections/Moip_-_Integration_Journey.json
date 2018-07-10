@@ -616,7 +616,7 @@
                 },
                 {
                   "key": "redirect_uri",
-                  "value": "",
+                  "value": "{{app_redirect_uri}}",
                   "description": "",
                   "type": "text"
                 },
