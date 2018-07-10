@@ -2739,6 +2739,7 @@
             {
               "listen": "test",
               "script": {
+                "id": "0105fbd4-80c1-43e7-b552-f5968a183116",
                 "type": "text/javascript",
                 "exec": [
                   "tests[\"Status code is 201\"] = responseCode.code === 201;",
@@ -2758,7 +2759,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "OAuth {{app_accessToken}}"
+                "value": "OAuth //ACCESS_TOKEN_FROM_PAYOR//"
               }
             ],
             "body": {
