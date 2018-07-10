@@ -489,7 +489,7 @@
               "raw": ""
             },
             "url": {
-              "raw": "{{url-connect}}/oauth/authorize?response_type=code&client_id={{app_id}}&redirect_uri={{app_redirect_url}}&scope=RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO",
+              "raw": "{{url-connect}}/oauth/authorize?response_type=code&client_id={{app_id}}&redirect_uri={{app_redirect_uri}}&scopes=RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO",
               "host": [
                 "{{url-connect}}"
               ],
@@ -499,24 +499,24 @@
               ],
               "query": [
                 {
-                  "equals": true,
                   "key": "response_type",
-                  "value": "code"
+                  "value": "code",
+                  "equals": true
                 },
                 {
-                  "equals": true,
                   "key": "client_id",
-                  "value": "{{app_id}}"
+                  "value": "{{app_id}}",
+                  "equals": true
                 },
                 {
-                  "equals": true,
                   "key": "redirect_uri",
-                  "value": "{{app_redirect_url}}"
+                  "value": "{{app_redirect_uri}}",
+                  "equals": true
                 },
                 {
-                  "equals": true,
-                  "key": "scope",
-                  "value": "RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO"
+                  "key": "scopes",
+                  "value": "RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO",
+                  "equals": true
                 }
               ]
             },
