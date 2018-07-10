@@ -2766,7 +2766,7 @@
               "raw": "{\n\t\"type\": \"sms\"\n}"
             },
             "url": "{{url}}/tfa/tokens/counters",
-            "description": "This request sends an SMS token to the mobile number of the payour Moip Account, which is authenticating through an OAuth permission."
+            "description": "If you want to create a `wallet` payment, besides having the payor `moipAccount.id` you must also validate that the person paying is really the Moip Account owner.\n\nTo do so, you must request them to include the 2FA token they can obtain in their Moip Account apps or, you can choose to send and SMS to the mobile number registered in the the payor Moip Account.\n\nThis request examplifies the second option."
           },
           "response": [
             {
