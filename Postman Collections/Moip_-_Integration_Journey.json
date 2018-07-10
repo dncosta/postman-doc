@@ -470,61 +470,6 @@
           ]
         },
         {
-          "_postman_id": "2aa42af2-85f8-4905-0d7f-bbbe89f4302c",
-          "name": "Request oAuth Permission",
-          "request": {
-            "auth": {
-              "type": "basic",
-              "basic": {
-                "username": "{{token}}",
-                "password": "{{key}}",
-                "saveHelperData": true,
-                "showPassword": false
-              }
-            },
-            "method": "LINK",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": ""
-            },
-            "url": {
-              "raw": "{{url-connect}}/oauth/authorize?response_type=code&client_id={{app_id}}&redirect_uri={{app_redirect_uri}}&scope=RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO",
-              "host": [
-                "{{url-connect}}"
-              ],
-              "path": [
-                "oauth",
-                "authorize"
-              ],
-              "query": [
-                {
-                  "key": "response_type",
-                  "value": "code",
-                  "equals": true
-                },
-                {
-                  "key": "client_id",
-                  "value": "{{app_id}}",
-                  "equals": true
-                },
-                {
-                  "key": "redirect_uri",
-                  "value": "{{app_redirect_uri}}",
-                  "equals": true
-                },
-                {
-                  "key": "scope",
-                  "value": "RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO",
-                  "equals": true
-                }
-              ]
-            },
-            "description": "This is the sample of a link to require OAuth permissions to a Classical Moip Account."
-          },
-          "response": []
-        },
-        {
           "_postman_id": "95dd1a0e-c399-4a81-977f-a20a63a05d76",
           "name": "Create classical account Copy",
           "event": [
@@ -710,6 +655,61 @@
               "body": "{\"id\":\"MPA-DB7193368140\",\"login\":\"1507241775@myemail.com\",\"accessToken\":\"f3d548bd3bad4f4f999d742c3690f242_v2\",\"channelId\":\"APP-RP3OIO91DLVT\",\"type\":\"MERCHANT\",\"transparentAccount\":false,\"email\":{\"address\":\"1507241775@myemail.com\",\"confirmed\":false},\"person\":{\"name\":\"Sales\",\"lastName\":\"Machine da Silva\",\"birthDate\":\"1994-03-01\",\"taxDocument\":{\"type\":\"CPF\",\"number\":\"553.114.416-40\"},\"address\":{\"street\":\"Av. Brigadeiro Faria de Lima\",\"streetNumber\":\"195\",\"district\":\"Financial District\",\"zipcode\":\"79031100\",\"zipCode\":\"79031100\",\"city\":\"S\u00e3o Paulo\",\"state\":\"SP\",\"country\":\"BRA\"},\"phone\":{\"countryCode\":\"55\",\"areaCode\":\"11\",\"number\":\"77121055\",\"verified\":false,\"phoneType\":\"not_informed\"}},\"createdAt\":\"2017-10-05T22:16:15.752Z\",\"_links\":{\"self\":{\"href\":\"https://sandbox.moip.com.br/moipaccounts/MPA-DB7193368140\",\"title\":null},\"setPassword\":{\"href\":\"https://desenvolvedor.moip.com.br/sandbox/AskForNewPassword.do?method=confirm\\u0026email=1507241775%40myemail.com\\u0026code=0d54844193c423f79d324ef58ea223ce\"}}}"
             }
           ]
+        },
+        {
+          "_postman_id": "2aa42af2-85f8-4905-0d7f-bbbe89f4302c",
+          "name": "Request oAuth Permission",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "username": "{{token}}",
+                "password": "{{key}}",
+                "saveHelperData": true,
+                "showPassword": false
+              }
+            },
+            "method": "LINK",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url-connect}}/oauth/authorize?response_type=code&client_id={{app_id}}&redirect_uri={{app_redirect_uri}}&scope=RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO",
+              "host": [
+                "{{url-connect}}"
+              ],
+              "path": [
+                "oauth",
+                "authorize"
+              ],
+              "query": [
+                {
+                  "key": "response_type",
+                  "value": "code",
+                  "equals": true
+                },
+                {
+                  "key": "client_id",
+                  "value": "{{app_id}}",
+                  "equals": true
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "{{app_redirect_uri}}",
+                  "equals": true
+                },
+                {
+                  "key": "scope",
+                  "value": "RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO",
+                  "equals": true
+                }
+              ]
+            },
+            "description": "This is the sample of a link to require OAuth permissions to a Classical Moip Account."
+          },
+          "response": []
         }
       ]
     },
