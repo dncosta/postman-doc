@@ -589,22 +589,22 @@
           ],
           "request": {
             "auth": {
-              "type": "basic",
-              "basic": {
-                "password": "{{key}}",
-                "username": "{{token}}"
-              }
+              "type": "noauth"
             },
             "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
                 "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{app_accessToken}}"
               }
             ],
             "body": {},
             "url": {
-              "raw": "{{url-connect}}/oauth/token?client_id={{app_id}}&client_secret={{app_secret}}&redirect_uri={{app_redirect_uri}}&grant_type=authorization_code&code=PLACE_CODE_HERE",
+              "raw": "{{url-connect}}/oauth/token?client_id={{app_id}}&client_secret={{app_secret}}&redirect_uri={{app_redirect_uri}}&grant_type=authorization_code&code=01390b64a8875f14a17561fccdb565f94674edd7",
               "host": [
                 "{{url-connect}}"
               ],
@@ -635,7 +635,7 @@
                 },
                 {
                   "key": "code",
-                  "value": "PLACE_CODE_HERE",
+                  "value": "01390b64a8875f14a17561fccdb565f94674edd7",
                   "equals": true
                 }
               ]
