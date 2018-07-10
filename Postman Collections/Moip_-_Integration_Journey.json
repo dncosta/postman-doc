@@ -2667,7 +2667,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"fundingInstrument\": {\n    \"method\": \"WALLET\",\n    \"wallet\": {\n      \"moipAccount\": {\n        \"id\": \"MPA-LKFH4CH8PX0T\"\n      }\n    }\n  }\n}"
+              "raw": "{\n  \"fundingInstrument\": {\n    \"method\": \"WALLET\",\n    \"wallet\": {\n      \"moipAccount\": {\n        \"id\": \"MPA-126789012456789\"\n      }\n    }\n  }\n}"
             },
             "url": "{{url}}/v2/orders/{{order_id}}/payments"
           },
