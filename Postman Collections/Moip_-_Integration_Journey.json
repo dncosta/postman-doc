@@ -604,7 +604,7 @@
             ],
             "body": {},
             "url": {
-              "raw": "{{url-connect}}/oauth/token?client_id={{app_id}}&client_secret={{app_secret}}&redirect_uri={{app_redirect_uri}}&grant_type=authorization_code&code=d0ee0082a5d3a67c5dc3693a9368c3affc75250d",
+              "raw": "{{url-connect}}/oauth/token?client_id={{app_id}}&client_secret={{app_secret}}&redirect_uri={{app_redirect_uri}}&grant_type=authorization_code&code=PLACE_CODE_HERE",
               "host": [
                 "{{url-connect}}"
               ],
@@ -635,7 +635,7 @@
                 },
                 {
                   "key": "code",
-                  "value": "d0ee0082a5d3a67c5dc3693a9368c3affc75250d",
+                  "value": "PLACE_CODE_HERE",
                   "equals": true
                 }
               ]
