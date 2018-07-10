@@ -471,7 +471,7 @@
         },
         {
           "_postman_id": "2aa42af2-85f8-4905-0d7f-bbbe89f4302c",
-          "name": "Request oAuth Permission",
+          "name": "Request OAuth Permission",
           "request": {
             "auth": {
               "type": "basic",
