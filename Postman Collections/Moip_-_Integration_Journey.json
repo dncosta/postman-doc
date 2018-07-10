@@ -592,7 +592,7 @@
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json"
+                "value": "application/x-www-form-urlencoded"
               },
               {
                 "key": "Authorization",
@@ -600,8 +600,39 @@
               }
             ],
             "body": {
-              "mode": "raw",
-              "raw": ""
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "client_id",
+                  "value": "",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "code",
+                  "value": "",
+                  "description": "",
+                  "type": "text"
+                }
+              ]
             },
             "url": "{{url}}/v2/oauth/token",
             "description": "Having a Classical Moip account means that the owner of that account can manage its sales in Moip environment.\nHowever, a marketplace can embeed the whole management experience including transfers and payout if it has the right OAuth permissions.\n"
