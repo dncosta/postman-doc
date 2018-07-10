@@ -2667,7 +2667,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{  \r\n    \"fundingInstrument\": {\r\n        \"method\": \"BOLETO\",\r\n        \"boleto\": {\r\n            \"expirationDate\": \"2020-09-30\",\r\n            \"instructionLines\": {\r\n                \"first\": \"TESTETETSTTTST\",\r\n                \"second\": \"tfcsddlksjsd\",\r\n                \"third\": \"lkshglashiuahgha\"\r\n            },\r\n            \"logoUri\": \"http://\"\r\n        }\r\n    }\r\n}"
+              "raw": "{\n  \"fundingInstrument\": {\n    \"method\": \"WALLET\",\n    \"wallet\": {\n      \"moipAccount\": {\n        \"id\": \"MPA-126789012456789\"\n      }\n    }\n  }\n}"
             },
             "url": "{{url}}/v2/orders/{{order_id}}/payments"
           },
