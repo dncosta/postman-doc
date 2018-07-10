@@ -622,13 +622,13 @@
                 },
                 {
                   "key": "grant_type",
-                  "value": "authorization",
+                  "value": "authorization_code",
                   "description": "",
                   "type": "text"
                 },
                 {
                   "key": "code",
-                  "value": "9133e1dcfd384ba0743cea968ec64694627ae456",
+                  "value": "69fa9b2dcbb38f62958e910dadc588e89b0e9786",
                   "description": "",
                   "type": "text"
                 }
