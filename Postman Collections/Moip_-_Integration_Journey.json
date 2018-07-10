@@ -602,42 +602,44 @@
                 "value": "application/x-www-form-urlencoded"
               }
             ],
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
+            "body": {},
+            "url": {
+              "raw": "{{url-connect}}/oauth/token?client_id={{app_id}}&client_secret={{app_secret}}&redirect_uri={{app_redirect_uri}}&grant_type=authorization_code&code=c595a45f5253f5d3b6121f48c62baa88329c6808",
+              "host": [
+                "{{url-connect}}"
+              ],
+              "path": [
+                "oauth",
+                "token"
+              ],
+              "query": [
                 {
-                  "key": "client_id={{app_id}}",
-                  "value": "",
-                  "type": "text",
-                  "description": ""
+                  "key": "client_id",
+                  "value": "{{app_id}}",
+                  "equals": true
                 },
                 {
-                  "key": "client_secret={{app_secret}}",
-                  "value": "",
-                  "type": "text",
-                  "description": ""
+                  "key": "client_secret",
+                  "value": "{{app_secret}}",
+                  "equals": true
                 },
                 {
-                  "key": "redirect_uri={{app_redirect_uri}}",
-                  "value": "",
-                  "type": "text",
-                  "description": ""
+                  "key": "redirect_uri",
+                  "value": "{{app_redirect_uri}}",
+                  "equals": true
                 },
                 {
-                  "key": "grant_type=authorization_code",
-                  "value": "",
-                  "type": "text",
-                  "description": ""
+                  "key": "grant_type",
+                  "value": "authorization_code",
+                  "equals": true
                 },
                 {
-                  "key": "code=1ecec5a6a9a7a612cdeeac5ff043e4389259f717",
-                  "value": "",
-                  "type": "text",
-                  "description": ""
+                  "key": "code",
+                  "value": "c595a45f5253f5d3b6121f48c62baa88329c6808",
+                  "equals": true
                 }
               ]
             },
-            "url": "{{url}}/v2/oauth/token",
             "description": "Having a Classical Moip account means that the owner of that account can manage its sales in Moip environment.\nHowever, a marketplace can embeed the whole management experience including transfers and payout if it has the right OAuth permissions.\n"
           },
           "response": [
