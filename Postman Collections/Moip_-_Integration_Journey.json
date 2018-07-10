@@ -2069,7 +2069,7 @@
         },
         {
           "_postman_id": "97ed14ca-fa84-40cd-84b9-33fe23e7b6e4",
-          "name": "Create 2nd order (APP authentication) Copy",
+          "name": "Create 3rd order (APP authentication)",
           "event": [
             {
               "listen": "test",
