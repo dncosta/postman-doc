@@ -2888,6 +2888,14 @@
               {
                 "key": "Authorization",
                 "value": "OAuth {{app_accessToken}}"
+              },
+              {
+                "key": "customer-2fa",
+                "value": "179246"
+              },
+              {
+                "key": "customer-2fa-type",
+                "value": "sms"
               }
             ],
             "body": {
