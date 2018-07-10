@@ -2540,7 +2540,7 @@
               "mode": "raw",
               "raw": "{\n\t\"type\": \"sms\"\n}"
             },
-            "url": "{{url}}/v2/orders/",
+            "url": "{{url}}/tfa/tokens/counters",
             "description": "This request sends an SMS token to the mobile number of the payour Moip Account."
           },
           "response": [
