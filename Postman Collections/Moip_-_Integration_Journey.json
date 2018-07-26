@@ -947,7 +947,7 @@
     {
       "_postman_id": "2321cb7b-00f0-c0af-34c9-63af6e449de5",
       "name": "Model 1 - Ecommerce transaction",
-      "description": "With this integration a marketplace or an ecommerce platform can create transaction on behalf of a merchant.\n\nIn this model, Marketplaces and Platforms:\n\n- Can create order and payments on behalf of merchants;\n\nAnd the merchants:\n\n- Pay Moip fees;\n- Have liability over chargebacks;\n- Have control over refunds;\n\n\n**What if I am not a marketplace or e-commerce platform?**\n\nIf you need to make transactions on behalf of yourself (and not a seller) instead of using **OAuth** authorization you can use the **Basic** authorization with your Token + Key (a base64 hash of \"YOUR_TOKEN:YOUR_KEY\") found in your Moip account's dashboard, in the **configuration** section.\n",
+      "description": "With this integration a marketplace or an ecommerce platform can create transaction on behalf of a merchant.\n\nIn this model, Marketplaces and Platforms:\n\n- Can create order and payments on behalf of merchants;\n\nAnd the merchants:\n\n- Pay Moip fees;\n- Have liability over chargebacks;\n- Have control over refunds;\n\n\n**What if I am not a marketplace or e-commerce platform?**\n\nIf you need to make transactions on behalf of yourself (and not a seller) instead of using **OAuth** authorization you can use the **Basic** authorization with your Token + Key (a base64 hash of `YOUR_TOKEN:YOUR_KEY`) found in your Moip account's dashboard, in the **configuration** section.\n",
       "item": [
         {
           "_postman_id": "ef31e512-1e85-1ecc-05ae-e04b16eea66a",
