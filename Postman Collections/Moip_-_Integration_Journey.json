@@ -1110,7 +1110,8 @@
               "mode": "raw",
               "raw": "{\n  \"installmentCount\": 1,\n  \"statementDescriptor\": \"MyStore\",\n  \"fundingInstrument\": {\n    \"method\": \"CREDIT_CARD\",\n    \"creditCard\": {\n      \"expirationMonth\": \"02\",\n      \"expirationYear\": \"20\",\n      \"number\": \"5555666677778884\",\n      \"cvc\": \"123\",\n      \"holder\": {\n        \"fullname\": \"Jose Portador da Silva\",\n        \"birthdate\": \"1988-12-30\",\n        \"taxDocument\": {\n          \"type\": \"CPF\",\n          \"number\": \"33333333333\"\n        },\n        \"phone\": {\n          \"countryCode\": \"55\",\n          \"areaCode\": \"11\",\n          \"number\": \"66778899\"\n        }\n      }\n    }\n  }\n}"
             },
-            "url": "{{url}}/v2/orders/{{order_id}}/payments"
+            "url": "{{url}}/v2/orders/{{order_id}}/payments",
+            "description": "Instead of sending the credit card attributes (`expirationMonth`, `expirationYear`, `number`, `cvc`) we suggest you encrypt this data it in the front end using our [JS Encryption SDK](https://github.com/moip/moip-sdk-js) and send just a `hash` attribute, this will make the transaction much safer."
           },
           "response": [
             {
