@@ -1773,6 +1773,28 @@
             }
           ]
         }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "81d8345d-4577-4302-9423-9b5f7f831056",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "03c18a76-b4b8-4f8f-be48-6e7819749fa7",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
       ]
     },
     {
