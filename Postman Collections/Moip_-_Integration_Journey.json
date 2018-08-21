@@ -4720,7 +4720,7 @@
     {
       "_postman_id": "3b6a6aff-d50f-7501-5882-a6a8d46a37d2",
       "name": "Model 5 - Split with escrow",
-      "description": "This model shows how a marketplace can escrow transactions.\n\nIn this model, Marketplaces:\n\n- Can escrow values up to 180 days after authorization;\n- Refund transactions under escrow, even when a receivers doesn't have balance;\n\n![EscrowExample](https://lh4.googleusercontent.com/zOLXvwodIdkgKBM71r_w0DtoXe4Tyn_Yh9Zjtp5JVusuCAVNRSui6wzyaHQOb-2apgsPmWPiLBPaba2yEO4g=w2560-h1356)",
+      "description": "This model shows how a marketplace can escrow transactions.\n\nIn this model, Marketplaces:\n\n- Can escrow values up to 180 days after authorization;\n- Refund transactions under escrow, even when a receivers doesn't have balance;\n\n![EscrowExample](https://lh6.googleusercontent.com/0GxIsOjzETNaR4GoMZ6J7sBWb2r-omjTEqWiaIk_-eB9pgJ38W8eBFwK8bTQrFRdNypt4xJL6KwiHMMfGG-O=w2560-h1452-rw)\n\nThis chart above shows an example of how the escrow feature works from a transactional perspective.",
       "item": [
         {
           "_postman_id": "b1566004-a439-0b57-a9a3-84524d3168ab",
