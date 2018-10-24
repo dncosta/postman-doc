@@ -53,7 +53,7 @@
               "raw": "{\r\n   \"name\": \"Marketplace do Moip\",\r\n   \"description\": \"Descri\u00e7\u00e3o do meu marketplace\",\r\n   \"site\": \"http://www.moip.com.br\",\r\n   \"redirectUri\": \"http://www.moip.com.br/redirect\"\r\n}"
             },
             "url": "{{url}}/v2/channels",
-            "description": "In order to start splitting payments a marketplace must have an OAuth client.\nIt's necessary to store this client accessToken and secret so the client can require OAuth permission to classical Moip Accounts.\n\nBelow we have and example of the process regarding the integration of an OAuth APP."
+            "description": "In order to start splitting payments a marketplace must have an OAuth client.\nIt's necessary to store this client accessToken and secret so the client can require OAuth permission to classical Wirecard Accounts.\n\nBelow we have and example of the process regarding the integration of an OAuth APP."
           },
           "response": [
             {
