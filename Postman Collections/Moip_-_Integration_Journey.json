@@ -662,7 +662,7 @@
                 }
               ]
             },
-            "description": "Having a Classical Moip account means that the owner of that account can manage its sales in Moip environment.\nHowever, a marketplace can embeed the whole management experience including transfers and payout if it has the right OAuth permissions.\n\nDon't forget to include the `code` obtained in the permission link as and `x-www-form-urlencoded` parameter."
+            "description": "Having a Classical Wirecard account means that the owner of that account can manage its sales in Wirecard environment.\nHowever, a marketplace can embeed the whole management experience including transfers and payout if it has the right OAuth permissions.\n\nDon't forget to include the `code` obtained in the permission link as and `x-www-form-urlencoded` parameter."
           },
           "response": [
             {
