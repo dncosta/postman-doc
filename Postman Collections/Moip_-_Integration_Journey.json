@@ -969,7 +969,7 @@
     {
       "_postman_id": "2321cb7b-00f0-c0af-34c9-63af6e449de5",
       "name": "Model 1 - Ecommerce transaction",
-      "description": "With this integration a marketplace or an ecommerce platform can create transaction on behalf of a merchant.\n\nIn this model, Marketplaces and Platforms:\n\n- Can create order and payments on behalf of merchants;\n\nAnd the merchants:\n\n- Pay Moip fees;\n- Have liability over chargebacks;\n- Have control over refunds;\n\n\n**What if I am not a marketplace or e-commerce platform?**\n\nIf you need to make transactions on behalf of yourself (and not a seller) instead of using **OAuth** authorization you can use the **Basic** authorization with your Token + Key (a base64 hash of `YOUR_TOKEN:YOUR_KEY`) found in your Moip account's dashboard, in the **configuration** section.\n",
+      "description": "With this integration a marketplace or an ecommerce platform can create transaction on behalf of a merchant.\n\nIn this model, Marketplaces and Platforms:\n\n- Can create order and payments on behalf of merchants;\n\nAnd the merchants:\n\n- Pay Wirecard fees;\n- Have liability over chargebacks;\n- Have control over refunds;\n\n\n**What if I am not a marketplace or e-commerce platform?**\n\nIf you need to make transactions on behalf of yourself (and not a seller) instead of using **OAuth** authorization you can use the **Basic** authorization with your Token + Key (a base64 hash of `YOUR_TOKEN:YOUR_KEY`) found in your Wirecard account's dashboard, in the **configuration** section.\n",
       "item": [
         {
           "_postman_id": "ef31e512-1e85-1ecc-05ae-e04b16eea66a",
@@ -2812,7 +2812,7 @@
               "raw": "{\n\t\"type\": \"sms\"\n}"
             },
             "url": "{{url}}/tfa/tokens/counters",
-            "description": "If you want to create a `wallet` payment, besides having the payor `moipAccount.id` you must also validate that the person paying is really the Moip Account owner.\n\nTo do so, you must request them to include the 2FA token they can obtain in their Moip Account apps or, you can choose to send and SMS to the mobile number registered in the the payor Moip Account.\n\nThis request examplifies the second option."
+            "description": "If you want to create a `wallet` payment, besides having the payor `moipAccount.id` you must also validate that the person paying is really the Wirecard Account owner.\n\nTo do so, you must request them to include the 2FA token they can obtain in their Wirecard Account apps or, you can choose to send and SMS to the mobile number registered in the the payor Wirecard Account.\n\nThis request examplifies the second option."
           },
           "response": [
             {
@@ -3050,7 +3050,7 @@
     {
       "_postman_id": "0b523b83-6d2f-ba3f-d8f5-0cff2b59f00c",
       "name": "Model 3 - Split with marketplace as secondary receiver",
-      "description": "With this integration the marketplace is the secondary receiver.\n\nIn this model, Marketplaces:\n\n- Receive part of the transaction;\n\nAnd the merchants:\n\n- Pay Moip fees;\n- Have liability over chargebacks;\n- Have control over refunds;",
+      "description": "With this integration the marketplace is the secondary receiver.\n\nIn this model, Marketplaces:\n\n- Receive part of the transaction;\n\nAnd the merchants:\n\n- Pay Wirecard fees;\n- Have liability over chargebacks;\n- Have control over refunds;",
       "item": [
         {
           "_postman_id": "f830d6b7-c576-1d9a-d35e-d8dfc74cdb52",
@@ -3907,12 +3907,34 @@
             }
           ]
         }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "833b21b0-36d9-45e4-ad47-5d2a73f59dad",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "32a8f432-2426-401a-9664-ea35a42b7a90",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
       ]
     },
     {
       "_postman_id": "6f4b65d1-4bde-4fe3-239a-af7e1b2633ab",
       "name": "Model 4 - Split with secondary as feePayor",
-      "description": "In this model, the marketplace continues as a primary receiver, however a secondary receiver is responsible for paying Moip fees.\n\nIn this model, Marketplaces:\n\n- Have liability over chargebacks;\n- Have control over refunds;\n\nAnd the merchants:\n\n- Receive part of the transaction;\n- Pay Moip fees;",
+      "description": "In this model, the marketplace continues as a primary receiver, however a secondary receiver is responsible for paying Wirecard fees.\n\nIn this model, Marketplaces:\n\n- Have liability over chargebacks;\n- Have control over refunds;\n\nAnd the merchants:\n\n- Receive part of the transaction;\n- Pay Wirecard fees;",
       "item": [
         {
           "_postman_id": "31a6dd3a-b471-159f-362f-83e4c1a90f9b",
@@ -4737,6 +4759,28 @@
               "body": "{\"id\":\"REF-B9LRQJK3COAG\",\"status\":\"REQUESTED\",\"events\":[{\"type\":\"REFUND.REQUESTED\",\"createdAt\":\"2017-10-05T22:22:48.000-03\"}],\"amount\":{\"total\":1000,\"gross\":1000,\"fees\":0,\"currency\":\"BRL\"},\"type\":\"PARTIAL\",\"refundingInstrument\":{\"bankAccount\":{\"bankNumber\":\"237\",\"bankName\":\"BANCO BRADESCO S.A.\",\"agencyNumber\":\"12345\",\"agencyCheckNumber\":\"0\",\"accountNumber\":\"12345678\",\"accountCheckNumber\":\"7\",\"type\":\"CHECKING\",\"holder\":{\"taxDocument\":{\"type\":\"CPF\",\"number\":\"22222222222\"},\"fullname\":\"Jose Silva\"}},\"method\":\"BANK_ACCOUNT\"},\"createdAt\":\"2017-10-05T22:22:48.000-03\",\"_links\":{\"self\":{\"href\":\"https://sandbox.moip.com.br/v2/refunds/REF-B9LRQJK3COAG\"},\"order\":{\"href\":\"https://sandbox.moip.com.br/v2/orders/ORD-MCT5IFAULXVM\",\"title\":\"ORD-MCT5IFAULXVM\"},\"payment\":{\"href\":\"https://sandbox.moip.com.br/v2/payments/PAY-U6VRFBCJLFWA\",\"title\":\"PAY-U6VRFBCJLFWA\"}}}"
             }
           ]
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "2e430d14-2cae-4167-956d-b4cb12d7f4a9",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "8f8f4648-22b6-400b-ab65-a61e38b0114e",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
         }
       ]
     },
