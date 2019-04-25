@@ -2,17 +2,14 @@
   "info": {
     "_postman_id": "bccaa367-04fd-a4b8-d91c-eb0b761f2812",
     "name": "Wirecard - Integration Journey",
-    "description": "## Before you start...\n\nHere we have the basic steps any merchant, marketplace or ecommerce platform should follow in order to take the best advantage from Wirecard's APIs.\nThe collections available in this document consider the most used business models and the main features Wirecard offers.\n\nThe documentation is divided in two basic integration scopes:\n\n- Scope 1 - Ecommerce Integration | This model considers the necessary steps for any ecommerce to start creating transactions.\n\n- Scope 2 - Marketplace/Platform Integration | This model considers the steps necessary to create splitted payments and/or create payment on behalf of other users.\n\nThe Scope 2 includes:\n\n- Account onboarding;\n- Split with marketplace as primaryReceiver;\n- Split with marketplace as secondaryReceiver;\n- Split with secondary as feePayor;\n- Split with escrow;\n- Split with multiorder (shared cart);\n- Split with multiorder with escrow\n- Payout\n\nThe onboarding and payout are pretty much the same for any marketplace or integrator that decides to use Wirecard as a payment service provider, but the payment flows can be quite different.\n\nSo, make sure you choose the one that best suits your business model.\n\n# Terminology\n\n## Ecommerce\n\nEcommerce term is related to any merchant or business model where the integration doesn't require payment splitting.\n\n## Integrator\n\nIn most cases the integrator is a marketplace or an ecommerce platform that is creating payments for a merchant. However, this term applies to any agent who is using Wirecard to create or retrieve payments on behalf of other user.\n\n## Primary Receiver \n\nThe primary receiver is responsible for refunding transactions and has liability over chargebacks.\nBy default, the primary receiver is also who pays for Wirecard fees, however it is possible to define another `feePayor` when an order is created.\n\n## Secondary Receiver:\n\nThe secondary receiver doesn't have liability over chargebacks and can't refund a transaction.\nA marketplace can define that a secondary receiver will pay Wirecard fees by declaring the attribute `\"feePayor\":true` in the `order` request.\n\n## OAuth APP\n\nSometimes can be refered as `channel` or `client`.\nAn APP OAuth represents a connector between an integrator and a merchant.\nThe use of that resource offers a lot of advantages, including:\n\n- Safe authentication, using an accessToken that can be renewed or expired;\n- Defining one unique (or many if you want to) notification preference for all merchants, so a merchant won't be able to change/delete it, breaking the integration;\n- Different pricing setups (depending on Wirecard contract). This allows the integrator to offer different pricing setups for its customers, with different fees and settlement preferences;\n- Different risk analysis rules in Wirecard's fraud prevention softwares;\n\n# How to use this documentation\n\nThis documentation is intended to clarify some of the main business models our APIs can support.\nAs a merchant, a marketplace or an ecommerce platform, you will not need to integrate all of those models, you just need to identify the one that suits you best and go for it.\n\nThis collection is not an API Reference, nor it contains details about all API fields, however it offers a clear overview of the main topics you must follow in order to have a successul integration.\n\nAnyway, if you need the API reference, there it goes: https://dev.moip.com.br/v2.0/reference\n\nFor now, our API reference is only available in portuguese.\n\n# Account types\n\nTo have a smooth account onboarding a marketplace must take into consideration what's the experience it want to offer for its merchants.\n\nWirecard offers two types of accounts, allowing any marketplace or platform to create two different onboarding experiences, they are: Transparent Account and Classical Account.\n\n|Transparent account      |Classical account     | \n|-------------------------|----------------------|\n|Customized experience|Merchants have access to a Wirecard Account |\n|Marketplace look and feel|Wirecard provides support for sellers|\n|Full marketplace onboarding|Sellers can have their own Ecommerce and send invoices|\n|Exclusive relationship with the sellers|Merchant can use any marketplace|\n|Wirecard white label|Payout process through Wirecard Dashboard|\n\n\n# Standard and Light Checkouts\n\nAs a payment provider we are concerned in making our APIs as flexible as possible at the same time we offer a highly secure platform with an advanced fraud prevention algorithm. That's why we created the [\"Programa Venda Protegida\"](https://suporte.moip.com.br/hc/pt-br/articles/115004708468-O-que-%C3%A9-o-programa-Venda-Protegida-e-como-ele-funciona-) (Secured Sales Program), in which we cover an amount of chargeback damage a merchant may have from credit card fraud.\n\nEven thou most of the merchants we have as customers consider flexibility and fraud prevention important in equal measure, there's a huge amount of business models that tend to have a deeper need for one or another. Maybe you want to create payments with a really low set of customer's information even if it brings a higher fraud tendency, maybe you want to do anything you can to prevent frauds even if it has some impact on your UI and UX.\n\nThat's why we enhanced our APIs flexibility by creating the \"Standard\" and \"Light\" checkouts so we can help any business to get where they want. \nStandard and Light checkouts are not reallly different products, they are simply different combinations of customer's information sent when creating an `Order` in the API.\n\n## Standard Checkout\n\nThe Standard Checkout is just the \"business as usual\" checkout version, it contains all the customer's details, offers the highest fraud prevention benefits and payments created within it are elegible to the [\"Programa Venda Protegida\"](https://suporte.moip.com.br/hc/pt-br/articles/115004708468-O-que-%C3%A9-o-programa-Venda-Protegida-e-como-ele-funciona-).\nAll `Order` and `Multiorder` requests in this documentation are using the Standard combination of attributes.\n\n## Light Checkout\n\nIf the Standard checkout knows every customer attribute, the Light checkout only needs the minimum set of customer's data. Offering to  merchants the possibility to create really short checkout pages in their websites or mobile APPs. \nPayments created with the Light Checkout still goes through our fraud prevention systems and analysis, but as the missing information decreases their efficiency payments are not elegible to the [\"Programa Venda Protegida\"](https://suporte.moip.com.br/hc/pt-br/articles/115004708468-O-que-%C3%A9-o-programa-Venda-Protegida-e-como-ele-funciona-).\n\n*IMPORTANT: We strongly recommend you to get in touch with our Support Team before using the Light Checkout. \nWe can help you to analyze the impact it may have for your business and prevent unexpected behavior from your customers.*\n\n### Checkout attributes combinations\n\n| api-resource | attribute                            |standard|light|\n|--------------|--------------------------------------|--------|-----|\n| customers    | fullname                             | \u2713      | \u2713   |\n| customers    | email                                | \u2713      | \u2713   |\n| customers    | birthdate                            | \u2713      |     |\n| customers    | taxDocument.type                     | \u2713      |     |\n| customers    | taxDocument.number                   | \u2713      |     |\n| customers    | phone.countryCode                    | \u2713      |     |\n| customers    | phone.areaCode                       | \u2713      |     |\n| customers    | phone.number                         | \u2713      |     |\n| customers    | shippingAddress.street               | \u2713      |     |\n| customers    | shippingAddress.streetNumber         | \u2713      |     |\n| customers    | shippingAddress.district             | \u2713      |     |\n| customers    | shippingAddress.city                 | \u2713      |     |\n| customers    | shippingAddress.state                | \u2713      |     |\n| customers    | shippingAddress.country              | \u2713      |     |\n| customers    | shippingAddress.zipCode              | \u2713      |     |\n| payments     | creditCard.holder.name               | \u2713      | \u2713   |\n| payments     | creditCard.holder.birthdate          | \u2713      | \u2713   |\n| payments     | creditCard.holder.taxDocument.type   | \u2713      | \u2713   |\n| payments     | creditCard.holder.taxDocument.number | \u2713      | \u2713   |\n\n\n# Wallet transactions [*Beta*]\n\nWirecard also offers the possibility to create `payments` from Wirecard Account to Wirecard Account, that is what we call a `Wallet` payment.\nThis payment method works in a similar way to a `tranfer`, except that transfers generate a debit and a credit that have no relationship with an `order` or `multiorder`. The `wallet` payment looks exactly like a boleto or a credit card payment, they are always related and attached to an order and its content.\n\nAlso important to mention, the `wallet` as a payment method doesn't required the buyer to be redirected to a Wirecard Checkout, which means that any marketplace can offer its own user experience and user interface.\n\n## Wallet as funding instrument\n\nAs described above, `wallet` payments are created in the same way boleto or credit card payments are, so all you need to do is to inform the `moipAccount.id` from the payor account in the `fundingInstrument` node in the payment request.\n\nA `moipAccount.id` can be obtained in two ways, when you create a new account by using the APIs or by requesting an OAuth permission to a buyer.\n\n## Two factor authentication\n\nWith the `moipAccount.id` you are in possession of the account main reference and identifier, now for every time you want to process a payment, you just need to require a confirmation from that customer/buyer that he actually is the owner of the Wirecard Account being debited.\n\nThat confirmation can be made through 2FA tokens, that can be obtained by the Wirecard Account APP (for Android) or SMS.\n\nTo validate tokens you should include the `customer-2fa-type` in the payment request header. To specify the type, use the parameters below:\n\n| customer-2fa-type | Description | \n| ----------| ------------|\n| `HOTP`    | `HMAC-based one time password`. Declares that the token included in the request header is \"event-based\" and was obtained by the buyer in a SMS|\n| `TOTP`    | `Time-based one time password`. Declared that the token included in the request header was obtained by the buyer through Wirecard Android APP.\n\n\nIMPORTANT: Our 2FA application follows the recommendations in the public [RFC](https://tools.ietf.org/html/rfc6238).\n\nFor more details, please look at the requests samples.\n\n>IMPORTANT: Wallet payment can only be refunded in its full amount. In other words, it's not possible to create partial refunds for them.\n\n\n\n# Changelog\n\n| Date | Change |\n| -----| ------| \n| 2017 | Documentation Created |\n| 2018-Jan | Included Multiorder and Escrow. Changed the way the models are displayed. |\n| 2018-Jun-15 | Included Standard and Light Checkouts | \n| 2018-Jul-10 | Included Wallet as a Beta transactional resource | \n| 2018-Jul-19 | Included the customer-2fa-token table for Wallet payments | ",
+    "description": "## Before you start...\n\nHere we have the basic steps any merchant, marketplace or ecommerce platform should follow in order to take the best advantage from Wirecard's APIs.\nThe collections available in this document consider the most used business models and the main features Wirecard offers.\n\nThe documentation is divided in two basic integration scopes:\n\n- Scope 1 - Ecommerce Integration | This model considers the necessary steps for any ecommerce to start creating transactions.\n\n- Scope 2 - Marketplace/Platform Integration | This model considers the steps necessary to create splitted payments and/or create payment on behalf of other users.\n\nThe Scope 2 includes:\n\n- Account onboarding;\n- Split with marketplace as primaryReceiver;\n- Split with marketplace as secondaryReceiver;\n- Split with secondary as feePayor;\n- Split with escrow;\n- Split with multiorder (shared cart);\n- Split with multiorder with escrow\n- Payout\n\nThe onboarding and payout are pretty much the same for any marketplace or integrator that decides to use Wirecard as a payment service provider, but the payment flows can be quite different.\n\nSo, make sure you choose the one that best suits your business model.\n\n# Terminology\n\n## Ecommerce\n\nEcommerce term is related to any merchant or business model where the integration doesn't require payment splitting.\n\n## Integrator\n\nIn most cases the integrator is a marketplace or an ecommerce platform that is creating payments for a merchant. However, this term applies to any agent who is using Wirecard to create or retrieve payments on behalf of other user.\n\n## Primary Receiver \n\nThe primary receiver is responsible for refunding transactions and has liability over chargebacks.\nBy default, the primary receiver is also who pays for Wirecard fees, however it is possible to define another `feePayor` when an order is created.\n\n## Secondary Receiver:\n\nThe secondary receiver doesn't have liability over chargebacks and can't refund a transaction.\nA marketplace can define that a secondary receiver will pay Wirecard fees by declaring the attribute `\"feePayor\":true` in the `order` request.\n\n## OAuth APP\n\nSometimes can be refered as `channel` or `client`.\nAn APP OAuth represents a connector between an integrator and a merchant.\nThe use of that resource offers a lot of advantages, including:\n\n- Safe authentication, using an accessToken that can be renewed or expired;\n- Defining one unique (or many if you want to) notification preference for all merchants, so a merchant won't be able to change/delete it, breaking the integration;\n- Different pricing setups (depending on Wirecard contract). This allows the integrator to offer different pricing setups for its customers, with different fees and settlement preferences;\n- Different risk analysis rules in Wirecard's fraud prevention softwares;\n\n# How to use this documentation\n\nThis documentation is intended to clarify some of the main business models our APIs can support.\nAs a merchant, a marketplace or an ecommerce platform, you will not need to integrate all of those models, you just need to identify the one that suits you best and go for it.\n\nThis collection is not an API Reference, nor it contains details about all API fields, however it offers a clear overview of the main topics you must follow in order to have a successul integration.\n\nAnyway, if you need the API reference, there it goes: https://dev.moip.com.br/v2.0/reference\n\nFor now, our API reference is only available in portuguese.\n\n# Account types\n\nTo have a smooth account onboarding a marketplace must take into consideration what's the experience it want to offer for its merchants.\n\nWirecard offers two types of accounts, allowing any marketplace or platform to create two different onboarding experiences, they are: Transparent Account and Classical Account.\n\n|Transparent account      |Classical account     | \n|-------------------------|----------------------|\n|Customized experience|Merchants have access to a Wirecard Account |\n|Marketplace look and feel|Wirecard provides support for sellers|\n|Full marketplace onboarding|Sellers can have their own Ecommerce and send invoices|\n|Exclusive relationship with the sellers|Merchant can use any marketplace|\n|Wirecard white label|Payout process through Wirecard Dashboard|\n\n\n# Standard and Light Checkouts\n\nAs a payment provider we are concerned in making our APIs as flexible as possible at the same time we offer a highly secure platform with an advanced fraud prevention algorithm. That's why we created the [\"Programa Venda Protegida\"](https://suporte.moip.com.br/hc/pt-br/articles/115004708468-O-que-%C3%A9-o-programa-Venda-Protegida-e-como-ele-funciona-) (Secured Sales Program), in which we cover an amount of chargeback damage a merchant may have from credit card fraud.\n\nEven thou most of the merchants we have as customers consider flexibility and fraud prevention important in equal measure, there's a huge amount of business models that tend to have a deeper need for one or another. Maybe you want to create payments with a really low set of customer's information even if it brings a higher fraud tendency, maybe you want to do anything you can to prevent frauds even if it has some impact on your UI and UX.\n\nThat's why we enhanced our APIs flexibility by creating the \"Standard\" and \"Light\" checkouts so we can help any business to get where they want. \nStandard and Light checkouts are not reallly different products, they are simply different combinations of customer's information sent when creating an `Order` in the API.\n\n## Standard Checkout\n\nThe Standard Checkout is just the \"business as usual\" checkout version, it contains all the customer's details, offers the highest fraud prevention benefits and payments created within it are elegible to the [\"Programa Venda Protegida\"](https://suporte.moip.com.br/hc/pt-br/articles/115004708468-O-que-%C3%A9-o-programa-Venda-Protegida-e-como-ele-funciona-).\nAll `Order` and `Multiorder` requests in this documentation are using the Standard combination of attributes.\n\n## Light Checkout\n\nIf the Standard checkout knows every customer attribute, the Light checkout only needs the minimum set of customer's data. Offering to  merchants the possibility to create really short checkout pages in their websites or mobile APPs. \nPayments created with the Light Checkout still goes through our fraud prevention systems and analysis, but as the missing information decreases their efficiency payments are not elegible to the [\"Programa Venda Protegida\"](https://suporte.moip.com.br/hc/pt-br/articles/115004708468-O-que-%C3%A9-o-programa-Venda-Protegida-e-como-ele-funciona-).\n\n*IMPORTANT: We strongly recommend you to get in touch with our Support Team before using the Light Checkout. \nWe can help you to analyze the impact it may have for your business and prevent unexpected behavior from your customers.*\n\n### Checkout attributes combinations\n\n| api-resource | attribute                            |standard|light|\n|--------------|--------------------------------------|--------|-----|\n| customers    | fullname                             | \u2713      | \u2713   |\n| customers    | email                                | \u2713      | \u2713   |\n| customers    | birthdate                            | \u2713      |     |\n| customers    | taxDocument.type                     | \u2713      |     |\n| customers    | taxDocument.number                   | \u2713      |     |\n| customers    | phone.countryCode                    | \u2713      |     |\n| customers    | phone.areaCode                       | \u2713      |     |\n| customers    | phone.number                         | \u2713      |     |\n| customers    | shippingAddress.street               | \u2713      |     |\n| customers    | shippingAddress.streetNumber         | \u2713      |     |\n| customers    | shippingAddress.district             | \u2713      |     |\n| customers    | shippingAddress.city                 | \u2713      |     |\n| customers    | shippingAddress.state                | \u2713      |     |\n| customers    | shippingAddress.country              | \u2713      |     |\n| customers    | shippingAddress.zipCode              | \u2713      |     |\n| payments     | creditCard.holder.name               | \u2713      | \u2713   |\n| payments     | creditCard.holder.birthdate          | \u2713      | \u2713   |\n| payments     | creditCard.holder.taxDocument.type   | \u2713      | \u2713   |\n| payments     | creditCard.holder.taxDocument.number | \u2713      | \u2713   |\n\n\n# Wallet transactions [*Beta*]\n\nWirecard also offers the possibility to create `payments` from Wirecard Account to Wirecard Account, that is what we call a `Wallet` payment.\nThis payment method works in a similar way to a `tranfer`, except that transfers generate a debit and a credit that have no relationship with an `order` or `multiorder`. The `wallet` payment looks exactly like a boleto or a credit card payment, they are always related and attached to an order and its content.\n\nAlso important to mention, the `wallet` as a payment method doesn't required the buyer to be redirected to a Wirecard Checkout, which means that any marketplace can offer its own user experience and user interface.\n\n## Wallet as funding instrument\n\nAs described above, `wallet` payments are created in the same way boleto or credit card payments are, so all you need to do is to inform the `moipAccount.id` from the payor account in the `fundingInstrument` node in the payment request.\n\nA `moipAccount.id` can be obtained in two ways, when you create a new account by using the APIs or by requesting an OAuth permission to a buyer.\n\n## Two factor authentication\n\nWith the `moipAccount.id` you are in possession of the account main reference and identifier, now for every time you want to process a payment, you just need to require a confirmation from that customer/buyer that he actually is the owner of the Wirecard Account being debited.\n\nThat confirmation can be made through 2FA tokens, that can be obtained by the Wirecard Account APP (for Android) or SMS.\n\nTo validate tokens you should include the `customer-2fa-type` in the payment request header. To specify the type, use the parameters below:\n\n| customer-2fa-type | Description | \n| ----------| ------------|\n| `HOTP`    | `HMAC-based one time password`. Declares that the token included in the request header is \"event-based\" and was obtained by the buyer in a SMS|\n| `TOTP`    | `Time-based one time password`. Declared that the token included in the request header was obtained by the buyer through Wirecard Android APP.\n\n\nIMPORTANT: Our 2FA application follows the recommendations in the public [RFC](https://tools.ietf.org/html/rfc6238).\n\nFor more details, please look at the requests samples.\n\n\n# Changelog\n\n| Date | Change |\n| -----| ------| \n| 2017 | Documentation Created |\n| 2018-Jan | Included Multiorder and Escrow. Changed the way the models are displayed. |\n| 2018-Jun-15 | Included Standard and Light Checkouts | \n| 2018-Jul-10 | Included Wallet as a Beta transactional resource | \n| 2018-Jul-19 | Included the customer-2fa-token table for Wallet payments | ",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
   "item": [
     {
-      "_postman_id": "6b99cbf1-d5e8-e50a-90ec-13a74a6cf3c0",
       "name": "API Authentication",
-      "description": "Wirecard APIs allows any customer to authenticate by using two different methods, `Base64 Authentication` or `OAuth Authentication`.\n\nFor all new integrations we recommend the use of an `OAuth Authentication` method, so the `Base64 Authentication` will be only used to create an `OAuth APP` and retrieve an `accessToken`.\n\nThe `accessToken` will then be used to create new accounts, orders, payments, require OAuth permissions and to connect with any other resource in the APIs.\n\n# How to retrieve your `Base64` token and key:\n\n1 - Go to [Wirecard sandbox](connect-sandbox.moip.com.br) and create your test account (or just login);\n\n2 - Minha Conta (My Account) >> Configura\u00e7\u00f5es (Settings) >> Chaves de Acesso (Keys) >> Chaves de Autentica\u00e7\u00e3o (Authentication Keys)\n \n",
       "item": [
         {
-          "_postman_id": "d33b2767-2d46-1881-7367-4f4288e51067",
           "name": " Create an OAuth APP ",
           "event": [
             {
@@ -32,6 +29,7 @@
               }
             }
           ],
+          "_postman_id": "d33b2767-2d46-1881-7367-4f4288e51067",
           "request": {
             "auth": {
               "type": "basic",
@@ -156,7 +154,6 @@
           ]
         },
         {
-          "_postman_id": "4af74ef5-6a91-c109-6e32-a93f8263e8db",
           "name": "Set APP notification preferences",
           "event": [
             {
@@ -169,6 +166,7 @@
               }
             }
           ],
+          "_postman_id": "4af74ef5-6a91-c109-6e32-a93f8263e8db",
           "request": {
             "method": "POST",
             "header": [
@@ -276,6 +274,8 @@
           ]
         }
       ],
+      "_postman_id": "6b99cbf1-d5e8-e50a-90ec-13a74a6cf3c0",
+      "description": "Wirecard APIs allows any customer to authenticate by using two different methods, `Base64 Authentication` or `OAuth Authentication`.\n\nFor all new integrations we recommend the use of an `OAuth Authentication` method, so the `Base64 Authentication` will be only used to create an `OAuth APP` and retrieve an `accessToken`.\n\nThe `accessToken` will then be used to create new accounts, orders, payments, require OAuth permissions and to connect with any other resource in the APIs.\n\n# How to retrieve your `Base64` token and key:\n\n1 - Go to [Wirecard sandbox](connect-sandbox.moip.com.br) and create your test account (or just login);\n\n2 - Minha Conta (My Account) >> Configura\u00e7\u00f5es (Settings) >> Chaves de Acesso (Keys) >> Chaves de Autentica\u00e7\u00e3o (Authentication Keys)\n \n",
       "event": [
         {
           "listen": "prerequest",
@@ -300,12 +300,9 @@
       ]
     },
     {
-      "_postman_id": "6293c8e4-f6b6-b76a-8850-1bd470bc256c",
       "name": "Onboarding [Classical Account]",
-      "description": "This folders contains all the steps necessary to create a classical account and retrieve `OAuth permissions`.",
       "item": [
         {
-          "_postman_id": "379a45bd-2d84-572a-39e8-9fac191114de",
           "name": "Create classical account",
           "event": [
             {
@@ -367,6 +364,7 @@
               }
             }
           ],
+          "_postman_id": "379a45bd-2d84-572a-39e8-9fac191114de",
           "request": {
             "method": "POST",
             "header": [
@@ -492,8 +490,8 @@
           ]
         },
         {
-          "_postman_id": "2aa42af2-85f8-4905-0d7f-bbbe89f4302c",
           "name": "Request OAuth Permission",
+          "_postman_id": "2aa42af2-85f8-4905-0d7f-bbbe89f4302c",
           "request": {
             "auth": {
               "type": "basic",
@@ -522,23 +520,19 @@
               "query": [
                 {
                   "key": "response_type",
-                  "value": "code",
-                  "equals": true
+                  "value": "code"
                 },
                 {
                   "key": "client_id",
-                  "value": "{{app_id}}",
-                  "equals": true
+                  "value": "{{app_id}}"
                 },
                 {
                   "key": "redirect_uri",
-                  "value": "{{app_redirect_uri}}",
-                  "equals": true
+                  "value": "{{app_redirect_uri}}"
                 },
                 {
                   "key": "scope",
-                  "value": "RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO",
-                  "equals": true
+                  "value": "RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO"
                 }
               ]
             },
@@ -547,7 +541,6 @@
           "response": []
         },
         {
-          "_postman_id": "95dd1a0e-c399-4a81-977f-a20a63a05d76",
           "name": "Generate OAuth AccessToken",
           "event": [
             {
@@ -609,6 +602,7 @@
               }
             }
           ],
+          "_postman_id": "95dd1a0e-c399-4a81-977f-a20a63a05d76",
           "request": {
             "auth": {
               "type": "noauth"
@@ -624,7 +618,10 @@
                 "value": "{{app_accessToken}}"
               }
             ],
-            "body": {},
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": []
+            },
             "url": {
               "raw": "{{url-connect}}/oauth/token?client_id={{app_id}}&client_secret={{app_secret}}&redirect_uri={{app_redirect_uri}}&grant_type=authorization_code&code=01390b64a8875f14a17561fccdb565f94674edd7",
               "host": [
@@ -637,28 +634,23 @@
               "query": [
                 {
                   "key": "client_id",
-                  "value": "{{app_id}}",
-                  "equals": true
+                  "value": "{{app_id}}"
                 },
                 {
                   "key": "client_secret",
-                  "value": "{{app_secret}}",
-                  "equals": true
+                  "value": "{{app_secret}}"
                 },
                 {
                   "key": "redirect_uri",
-                  "value": "{{app_redirect_uri}}",
-                  "equals": true
+                  "value": "{{app_redirect_uri}}"
                 },
                 {
                   "key": "grant_type",
-                  "value": "authorization_code",
-                  "equals": true
+                  "value": "authorization_code"
                 },
                 {
                   "key": "code",
-                  "value": "01390b64a8875f14a17561fccdb565f94674edd7",
-                  "equals": true
+                  "value": "01390b64a8875f14a17561fccdb565f94674edd7"
                 }
               ]
             },
@@ -769,15 +761,14 @@
             }
           ]
         }
-      ]
+      ],
+      "_postman_id": "6293c8e4-f6b6-b76a-8850-1bd470bc256c",
+      "description": "This folders contains all the steps necessary to create a classical account and retrieve `OAuth permissions`."
     },
     {
-      "_postman_id": "0ccbae13-a113-96b4-1cdd-b49179aa0500",
       "name": "Onboarding [Transparent Account]",
-      "description": "This folder contains all steps necessary to create a transparent account.\nTransparent accounts `accessToken` always come with full oauth permissions. \n",
       "item": [
         {
-          "_postman_id": "d348c77f-3fa6-c524-5207-175bce053450",
           "name": "Create transparent account",
           "event": [
             {
@@ -840,6 +831,7 @@
               }
             }
           ],
+          "_postman_id": "d348c77f-3fa6-c524-5207-175bce053450",
           "request": {
             "method": "POST",
             "header": [
@@ -964,15 +956,14 @@
             }
           ]
         }
-      ]
+      ],
+      "_postman_id": "0ccbae13-a113-96b4-1cdd-b49179aa0500",
+      "description": "This folder contains all steps necessary to create a transparent account.\nTransparent accounts `accessToken` always come with full oauth permissions. \n"
     },
     {
-      "_postman_id": "2321cb7b-00f0-c0af-34c9-63af6e449de5",
       "name": "Model 1 - Ecommerce transaction",
-      "description": "With this integration a marketplace or an ecommerce platform can create transaction on behalf of a merchant.\n\nIn this model, Marketplaces and Platforms:\n\n- Can create order and payments on behalf of merchants;\n\nAnd the merchants:\n\n- Pay Wirecard fees;\n- Have liability over chargebacks;\n- Have control over refunds;\n\n\n**What if I am not a marketplace or e-commerce platform?**\n\nIf you need to make transactions on behalf of yourself (and not a seller) instead of using **OAuth** authorization you can use the **Basic** authorization with your Token + Key (a base64 hash of `YOUR_TOKEN:YOUR_KEY`) found in your Wirecard account's dashboard, in the **configuration** section.\n",
       "item": [
         {
-          "_postman_id": "ef31e512-1e85-1ecc-05ae-e04b16eea66a",
           "name": "Create order (Merchant authentication)",
           "event": [
             {
@@ -988,6 +979,7 @@
               }
             }
           ],
+          "_postman_id": "ef31e512-1e85-1ecc-05ae-e04b16eea66a",
           "request": {
             "method": "POST",
             "header": [
@@ -1100,7 +1092,6 @@
           ]
         },
         {
-          "_postman_id": "7b1bde93-de71-a71c-1fd1-68c79dae687f",
           "name": "Create credit card payment (Merchant authentication)",
           "event": [
             {
@@ -1116,6 +1107,7 @@
               }
             }
           ],
+          "_postman_id": "7b1bde93-de71-a71c-1fd1-68c79dae687f",
           "request": {
             "method": "POST",
             "header": [
@@ -1229,7 +1221,6 @@
           ]
         },
         {
-          "_postman_id": "f6725a2c-8c29-e917-11b3-592e2d0fa0dc",
           "name": "Create credit card refund (Merchant authentication)",
           "event": [
             {
@@ -1245,6 +1236,7 @@
               }
             }
           ],
+          "_postman_id": "f6725a2c-8c29-e917-11b3-592e2d0fa0dc",
           "request": {
             "method": "POST",
             "header": [
@@ -1357,7 +1349,6 @@
           ]
         },
         {
-          "_postman_id": "ca537609-b7ed-370a-ca58-09253aa9c5f5",
           "name": "Create 2nd order (Merchant authentication)",
           "event": [
             {
@@ -1373,6 +1364,7 @@
               }
             }
           ],
+          "_postman_id": "ca537609-b7ed-370a-ca58-09253aa9c5f5",
           "request": {
             "method": "POST",
             "header": [
@@ -1485,7 +1477,6 @@
           ]
         },
         {
-          "_postman_id": "640a312a-533d-ce75-814e-6aca4c23dbd2",
           "name": "Create boleto payment (Merchant authentication)",
           "event": [
             {
@@ -1501,6 +1492,7 @@
               }
             }
           ],
+          "_postman_id": "640a312a-533d-ce75-814e-6aca4c23dbd2",
           "request": {
             "method": "POST",
             "header": [
@@ -1613,7 +1605,6 @@
           ]
         },
         {
-          "_postman_id": "d60391a1-9af9-d594-2c96-63ea2442d91f",
           "name": "Authorized boleto (Merchant authentication)",
           "event": [
             {
@@ -1626,6 +1617,7 @@
               }
             }
           ],
+          "_postman_id": "d60391a1-9af9-d594-2c96-63ea2442d91f",
           "request": {
             "method": "POST",
             "header": [
@@ -1653,12 +1645,10 @@
               ],
               "query": [
                 {
-                  "equals": true,
                   "key": "payment_id",
                   "value": "{{payment_id}}"
                 },
                 {
-                  "equals": true,
                   "key": "amount",
                   "value": "2000"
                 }
@@ -1669,7 +1659,6 @@
           "response": []
         },
         {
-          "_postman_id": "afd01a89-0a47-02cf-e348-7fcfee3336a3",
           "name": "Create bank account refund (Merchant authentication)",
           "event": [
             {
@@ -1685,6 +1674,7 @@
               }
             }
           ],
+          "_postman_id": "afd01a89-0a47-02cf-e348-7fcfee3336a3",
           "request": {
             "method": "POST",
             "header": [
@@ -1797,6 +1787,8 @@
           ]
         }
       ],
+      "_postman_id": "2321cb7b-00f0-c0af-34c9-63af6e449de5",
+      "description": "With this integration a marketplace or an ecommerce platform can create transaction on behalf of a merchant.\n\nIn this model, Marketplaces and Platforms:\n\n- Can create order and payments on behalf of merchants;\n\nAnd the merchants:\n\n- Pay Wirecard fees;\n- Have liability over chargebacks;\n- Have control over refunds;\n\n\n**What if I am not a marketplace or e-commerce platform?**\n\nIf you need to make transactions on behalf of yourself (and not a seller) instead of using **OAuth** authorization you can use the **Basic** authorization with your Token + Key (a base64 hash of `YOUR_TOKEN:YOUR_KEY`) found in your Wirecard account's dashboard, in the **configuration** section.\n",
       "event": [
         {
           "listen": "prerequest",
@@ -1821,12 +1813,9 @@
       ]
     },
     {
-      "_postman_id": "620b53aa-d1c3-78cd-810e-6188ddb66b25",
       "name": "Model 2  -  Split with marketplace as primary receiver",
-      "description": "This is the most simple use of Moip's marketplace service.\nThe marketplace is a primary receiver and split the transaction amount with one or more secondary receivers.\n\nIn this model, Marketplaces:\n\n- Have liability over chargebacks;\n- Have control over refunds;\n- Pay Moip fees;\n\nAnd the merchants:\n\n- Receive part of the transaction.",
       "item": [
         {
-          "_postman_id": "009502f5-2dcc-b6ba-5de1-7e4e6594aaa5",
           "name": "Create order (APP authentication)",
           "event": [
             {
@@ -1842,6 +1831,7 @@
               }
             }
           ],
+          "_postman_id": "009502f5-2dcc-b6ba-5de1-7e4e6594aaa5",
           "request": {
             "method": "POST",
             "header": [
@@ -1954,7 +1944,6 @@
           ]
         },
         {
-          "_postman_id": "d3ae4a25-1094-29eb-58eb-8617344f653c",
           "name": "Create credit card payment (APP authentication)",
           "event": [
             {
@@ -1970,6 +1959,7 @@
               }
             }
           ],
+          "_postman_id": "d3ae4a25-1094-29eb-58eb-8617344f653c",
           "request": {
             "method": "POST",
             "header": [
@@ -2082,7 +2072,6 @@
           ]
         },
         {
-          "_postman_id": "678fe69f-8518-b301-13fc-a72e90aa6d41",
           "name": "Create credit card refund (APP authentication)",
           "event": [
             {
@@ -2098,6 +2087,7 @@
               }
             }
           ],
+          "_postman_id": "678fe69f-8518-b301-13fc-a72e90aa6d41",
           "request": {
             "method": "POST",
             "header": [
@@ -2210,7 +2200,6 @@
           ]
         },
         {
-          "_postman_id": "ce905435-3604-8eb2-c67d-b0b0b678bbd6",
           "name": "Create 2nd order (APP authentication)",
           "event": [
             {
@@ -2226,6 +2215,7 @@
               }
             }
           ],
+          "_postman_id": "ce905435-3604-8eb2-c67d-b0b0b678bbd6",
           "request": {
             "method": "POST",
             "header": [
@@ -2338,7 +2328,6 @@
           ]
         },
         {
-          "_postman_id": "36396434-51f4-4bf2-f293-48a00e47dd56",
           "name": "Create boleto payment (APP authentication)",
           "event": [
             {
@@ -2354,6 +2343,7 @@
               }
             }
           ],
+          "_postman_id": "36396434-51f4-4bf2-f293-48a00e47dd56",
           "request": {
             "method": "POST",
             "header": [
@@ -2466,7 +2456,6 @@
           ]
         },
         {
-          "_postman_id": "44cc17ad-6757-1156-1eee-8b66b748ac58",
           "name": "Authorized boleto (APP authentication)",
           "event": [
             {
@@ -2479,6 +2468,7 @@
               }
             }
           ],
+          "_postman_id": "44cc17ad-6757-1156-1eee-8b66b748ac58",
           "request": {
             "method": "POST",
             "header": [
@@ -2507,13 +2497,11 @@
               "query": [
                 {
                   "key": "payment_id",
-                  "value": "{{payment_id}}",
-                  "equals": true
+                  "value": "{{payment_id}}"
                 },
                 {
                   "key": "amount",
-                  "value": "2000",
-                  "equals": true
+                  "value": "2000"
                 }
               ]
             },
@@ -2522,7 +2510,6 @@
           "response": []
         },
         {
-          "_postman_id": "7f16654d-ad00-5fae-72c5-1905a554a93c",
           "name": "Create bank account refund (APP authentication)",
           "event": [
             {
@@ -2538,6 +2525,7 @@
               }
             }
           ],
+          "_postman_id": "7f16654d-ad00-5fae-72c5-1905a554a93c",
           "request": {
             "method": "POST",
             "header": [
@@ -2650,7 +2638,6 @@
           ]
         },
         {
-          "_postman_id": "97ed14ca-fa84-40cd-84b9-33fe23e7b6e4",
           "name": "Create 3rd order (APP authentication)",
           "event": [
             {
@@ -2666,6 +2653,7 @@
               }
             }
           ],
+          "_postman_id": "97ed14ca-fa84-40cd-84b9-33fe23e7b6e4",
           "request": {
             "method": "POST",
             "header": [
@@ -2778,7 +2766,6 @@
           ]
         },
         {
-          "_postman_id": "3befc1d4-3a62-4ec2-8869-5b71337f3990",
           "name": "Send SMS token to payor",
           "event": [
             {
@@ -2795,6 +2782,7 @@
               }
             }
           ],
+          "_postman_id": "3befc1d4-3a62-4ec2-8869-5b71337f3990",
           "request": {
             "method": "POST",
             "header": [
@@ -2908,7 +2896,6 @@
           ]
         },
         {
-          "_postman_id": "e5981cc6-38d0-4835-be7a-fbf405ed0616",
           "name": "Create a wallet payment (APP authentication)",
           "event": [
             {
@@ -2925,6 +2912,7 @@
               }
             }
           ],
+          "_postman_id": "e5981cc6-38d0-4835-be7a-fbf405ed0616",
           "request": {
             "method": "POST",
             "header": [
@@ -3045,15 +3033,14 @@
             }
           ]
         }
-      ]
+      ],
+      "_postman_id": "620b53aa-d1c3-78cd-810e-6188ddb66b25",
+      "description": "This is the most simple use of Moip's marketplace service.\nThe marketplace is a primary receiver and split the transaction amount with one or more secondary receivers.\n\nIn this model, Marketplaces:\n\n- Have liability over chargebacks;\n- Have control over refunds;\n- Pay Moip fees;\n\nAnd the merchants:\n\n- Receive part of the transaction."
     },
     {
-      "_postman_id": "0b523b83-6d2f-ba3f-d8f5-0cff2b59f00c",
       "name": "Model 3 - Split with marketplace as secondary receiver",
-      "description": "With this integration the marketplace is the secondary receiver.\n\nIn this model, Marketplaces:\n\n- Receive part of the transaction;\n\nAnd the merchants:\n\n- Pay Wirecard fees;\n- Have liability over chargebacks;\n- Have control over refunds;",
       "item": [
         {
-          "_postman_id": "f830d6b7-c576-1d9a-d35e-d8dfc74cdb52",
           "name": "Create order (Merchant authentication)",
           "event": [
             {
@@ -3069,6 +3056,7 @@
               }
             }
           ],
+          "_postman_id": "f830d6b7-c576-1d9a-d35e-d8dfc74cdb52",
           "request": {
             "method": "POST",
             "header": [
@@ -3181,7 +3169,6 @@
           ]
         },
         {
-          "_postman_id": "6945f10e-a919-e805-97e3-3dac57e5d92f",
           "name": "Get PublicKeys (Merchant authentication)",
           "event": [
             {
@@ -3194,6 +3181,7 @@
               }
             }
           ],
+          "_postman_id": "6945f10e-a919-e805-97e3-3dac57e5d92f",
           "request": {
             "method": "GET",
             "header": [
@@ -3202,17 +3190,12 @@
                 "value": "OAuth {{cmerchant_accessToken}}"
               }
             ],
-            "body": {
-              "mode": "raw",
-              "raw": ""
-            },
             "url": "{{url}}/v2/keys/",
             "description": "Public keys are used to encrypt credit card data on client side before sending them through a non-PCI compliant server. This encryption is done with Moip JS SDK.\nhttps://github.com/moip/moip-sdk-js.\n\nIMPORTANT: If a merchant is PCI-DSS compliant, then the use of creditcard encription is not needed."
           },
           "response": []
         },
         {
-          "_postman_id": "48354f7a-1cff-1cb2-faa2-f4682f3a6ec3",
           "name": "Create credit card payment (Merchant authentication)",
           "event": [
             {
@@ -3228,6 +3211,7 @@
               }
             }
           ],
+          "_postman_id": "48354f7a-1cff-1cb2-faa2-f4682f3a6ec3",
           "request": {
             "method": "POST",
             "header": [
@@ -3340,7 +3324,6 @@
           ]
         },
         {
-          "_postman_id": "01365f32-0632-eb9d-dc23-f110905f5bb6",
           "name": "Create credit card refund (Merchant authentication)",
           "event": [
             {
@@ -3356,6 +3339,7 @@
               }
             }
           ],
+          "_postman_id": "01365f32-0632-eb9d-dc23-f110905f5bb6",
           "request": {
             "method": "POST",
             "header": [
@@ -3468,7 +3452,6 @@
           ]
         },
         {
-          "_postman_id": "eddf3e1d-a91c-1b26-c30d-5fc5ebd349b5",
           "name": "Create 2nd order (Merchant authentication)",
           "event": [
             {
@@ -3484,6 +3467,7 @@
               }
             }
           ],
+          "_postman_id": "eddf3e1d-a91c-1b26-c30d-5fc5ebd349b5",
           "request": {
             "method": "POST",
             "header": [
@@ -3596,7 +3580,6 @@
           ]
         },
         {
-          "_postman_id": "b3a10afa-5d02-92e8-090e-8f9ad901c117",
           "name": "Create boleto payment (Merchant authentication)",
           "event": [
             {
@@ -3612,6 +3595,7 @@
               }
             }
           ],
+          "_postman_id": "b3a10afa-5d02-92e8-090e-8f9ad901c117",
           "request": {
             "method": "POST",
             "header": [
@@ -3724,7 +3708,6 @@
           ]
         },
         {
-          "_postman_id": "8461b4b5-ee13-dc5a-3cfe-ee30d010afd6",
           "name": "Authorized boleto (Merchant authentication)",
           "event": [
             {
@@ -3737,6 +3720,7 @@
               }
             }
           ],
+          "_postman_id": "8461b4b5-ee13-dc5a-3cfe-ee30d010afd6",
           "request": {
             "method": "POST",
             "header": [
@@ -3765,13 +3749,11 @@
               "query": [
                 {
                   "key": "payment_id",
-                  "value": "{{payment_id}}",
-                  "equals": true
+                  "value": "{{payment_id}}"
                 },
                 {
                   "key": "amount",
-                  "value": "2000",
-                  "equals": true
+                  "value": "2000"
                 }
               ]
             },
@@ -3780,7 +3762,6 @@
           "response": []
         },
         {
-          "_postman_id": "52af4c1a-0e68-7e56-bd38-840989d79647",
           "name": "Create bank account refund (Merchant authentication)",
           "event": [
             {
@@ -3796,6 +3777,7 @@
               }
             }
           ],
+          "_postman_id": "52af4c1a-0e68-7e56-bd38-840989d79647",
           "request": {
             "method": "POST",
             "header": [
@@ -3908,6 +3890,8 @@
           ]
         }
       ],
+      "_postman_id": "0b523b83-6d2f-ba3f-d8f5-0cff2b59f00c",
+      "description": "With this integration the marketplace is the secondary receiver.\n\nIn this model, Marketplaces:\n\n- Receive part of the transaction;\n\nAnd the merchants:\n\n- Pay Wirecard fees;\n- Have liability over chargebacks;\n- Have control over refunds;",
       "event": [
         {
           "listen": "prerequest",
@@ -3932,12 +3916,9 @@
       ]
     },
     {
-      "_postman_id": "6f4b65d1-4bde-4fe3-239a-af7e1b2633ab",
       "name": "Model 4 - Split with secondary as feePayor",
-      "description": "In this model, the marketplace continues as a primary receiver, however a secondary receiver is responsible for paying Wirecard fees.\n\nIn this model, Marketplaces:\n\n- Have liability over chargebacks;\n- Have control over refunds;\n\nAnd the merchants:\n\n- Receive part of the transaction;\n- Pay Wirecard fees;",
       "item": [
         {
-          "_postman_id": "31a6dd3a-b471-159f-362f-83e4c1a90f9b",
           "name": "Create order (feePayor)",
           "event": [
             {
@@ -3953,6 +3934,7 @@
               }
             }
           ],
+          "_postman_id": "31a6dd3a-b471-159f-362f-83e4c1a90f9b",
           "request": {
             "method": "POST",
             "header": [
@@ -4065,7 +4047,6 @@
           ]
         },
         {
-          "_postman_id": "fa145369-e9ca-42cd-44bb-676bb63fc9b1",
           "name": "Create credit card payment (feePayor)",
           "event": [
             {
@@ -4081,6 +4062,7 @@
               }
             }
           ],
+          "_postman_id": "fa145369-e9ca-42cd-44bb-676bb63fc9b1",
           "request": {
             "method": "POST",
             "header": [
@@ -4193,7 +4175,6 @@
           ]
         },
         {
-          "_postman_id": "dc029673-df4e-da35-c765-9ec6f0a26656",
           "name": "Create credit card refund (feePayor)",
           "event": [
             {
@@ -4209,6 +4190,7 @@
               }
             }
           ],
+          "_postman_id": "dc029673-df4e-da35-c765-9ec6f0a26656",
           "request": {
             "method": "POST",
             "header": [
@@ -4321,7 +4303,6 @@
           ]
         },
         {
-          "_postman_id": "e7e34a64-d7ff-0bdf-fdc8-85008cf82828",
           "name": "Create 2nd order (feePayor)",
           "event": [
             {
@@ -4337,6 +4318,7 @@
               }
             }
           ],
+          "_postman_id": "e7e34a64-d7ff-0bdf-fdc8-85008cf82828",
           "request": {
             "method": "POST",
             "header": [
@@ -4449,7 +4431,6 @@
           ]
         },
         {
-          "_postman_id": "f28910dd-8ffa-4d95-4a60-75cd47d7e1d8",
           "name": "Create boleto payment (feePayor)",
           "event": [
             {
@@ -4465,6 +4446,7 @@
               }
             }
           ],
+          "_postman_id": "f28910dd-8ffa-4d95-4a60-75cd47d7e1d8",
           "request": {
             "method": "POST",
             "header": [
@@ -4577,7 +4559,6 @@
           ]
         },
         {
-          "_postman_id": "2de7cf2c-5d20-a74d-5c74-598d5b491921",
           "name": "Authorized boleto (feePayor)",
           "event": [
             {
@@ -4590,6 +4571,7 @@
               }
             }
           ],
+          "_postman_id": "2de7cf2c-5d20-a74d-5c74-598d5b491921",
           "request": {
             "method": "POST",
             "header": [
@@ -4618,13 +4600,11 @@
               "query": [
                 {
                   "key": "payment_id",
-                  "value": "{{payment_id}}",
-                  "equals": true
+                  "value": "{{payment_id}}"
                 },
                 {
                   "key": "amount",
-                  "value": "2000",
-                  "equals": true
+                  "value": "2000"
                 }
               ]
             },
@@ -4633,7 +4613,6 @@
           "response": []
         },
         {
-          "_postman_id": "481e54c9-b4c4-bfba-434a-d3310f47da4f",
           "name": "Create bank account refund (feePayor)",
           "event": [
             {
@@ -4649,6 +4628,7 @@
               }
             }
           ],
+          "_postman_id": "481e54c9-b4c4-bfba-434a-d3310f47da4f",
           "request": {
             "method": "POST",
             "header": [
@@ -4761,6 +4741,8 @@
           ]
         }
       ],
+      "_postman_id": "6f4b65d1-4bde-4fe3-239a-af7e1b2633ab",
+      "description": "In this model, the marketplace continues as a primary receiver, however a secondary receiver is responsible for paying Wirecard fees.\n\nIn this model, Marketplaces:\n\n- Have liability over chargebacks;\n- Have control over refunds;\n\nAnd the merchants:\n\n- Receive part of the transaction;\n- Pay Wirecard fees;",
       "event": [
         {
           "listen": "prerequest",
@@ -4785,12 +4767,9 @@
       ]
     },
     {
-      "_postman_id": "3b6a6aff-d50f-7501-5882-a6a8d46a37d2",
       "name": "Model 5 - Split with escrow",
-      "description": "This model shows how a marketplace can escrow transactions.\n\nIn this model, Marketplaces:\n\n- Can escrow values up to 180 days after authorization;\n- Refund transactions under escrow, even when a receivers doesn't have balance;\n\n![EscrowExample](https://lh6.googleusercontent.com/0GxIsOjzETNaR4GoMZ6J7sBWb2r-omjTEqWiaIk_-eB9pgJ38W8eBFwK8bTQrFRdNypt4xJL6KwiHMMfGG-O=w2560-h1452-rw)\n\nThis chart above shows an example of how the escrow feature works from a transactional perspective.",
       "item": [
         {
-          "_postman_id": "b1566004-a439-0b57-a9a3-84524d3168ab",
           "name": "Create order (escrow)",
           "event": [
             {
@@ -4806,6 +4785,7 @@
               }
             }
           ],
+          "_postman_id": "b1566004-a439-0b57-a9a3-84524d3168ab",
           "request": {
             "method": "POST",
             "header": [
@@ -4918,7 +4898,6 @@
           ]
         },
         {
-          "_postman_id": "58406c83-e75a-a11e-1b9f-64ec6ab8f807",
           "name": "Create credit card payment (escrow)",
           "event": [
             {
@@ -4936,6 +4915,7 @@
               }
             }
           ],
+          "_postman_id": "58406c83-e75a-a11e-1b9f-64ec6ab8f807",
           "request": {
             "method": "POST",
             "header": [
@@ -5138,7 +5118,6 @@
           ]
         },
         {
-          "_postman_id": "49731adb-990e-0d18-fe6f-322791be55be",
           "name": "Release escrow",
           "event": [
             {
@@ -5151,6 +5130,7 @@
               }
             }
           ],
+          "_postman_id": "49731adb-990e-0d18-fe6f-322791be55be",
           "request": {
             "method": "POST",
             "header": [
@@ -5263,7 +5243,6 @@
           ]
         },
         {
-          "_postman_id": "c6a4b393-2be4-7fd5-2454-22f473a52307",
           "name": "Create credit card refund (escrow)",
           "event": [
             {
@@ -5279,6 +5258,7 @@
               }
             }
           ],
+          "_postman_id": "c6a4b393-2be4-7fd5-2454-22f473a52307",
           "request": {
             "method": "POST",
             "header": [
@@ -5391,7 +5371,6 @@
           ]
         },
         {
-          "_postman_id": "dc784e46-5d4b-af28-7f17-3bfdd40cd56d",
           "name": "Create 2nd order (escrow)",
           "event": [
             {
@@ -5407,6 +5386,7 @@
               }
             }
           ],
+          "_postman_id": "dc784e46-5d4b-af28-7f17-3bfdd40cd56d",
           "request": {
             "method": "POST",
             "header": [
@@ -5519,7 +5499,6 @@
           ]
         },
         {
-          "_postman_id": "e963682a-94e8-2a68-5ba2-70cdd3cbe290",
           "name": "Create boleto payment (escrow)",
           "event": [
             {
@@ -5537,6 +5516,7 @@
               }
             }
           ],
+          "_postman_id": "e963682a-94e8-2a68-5ba2-70cdd3cbe290",
           "request": {
             "method": "POST",
             "header": [
@@ -5649,7 +5629,6 @@
           ]
         },
         {
-          "_postman_id": "a9258cc0-eae0-6234-0ce0-94a751e85efd",
           "name": "Authorize boleto (escrow)",
           "event": [
             {
@@ -5662,6 +5641,7 @@
               }
             }
           ],
+          "_postman_id": "a9258cc0-eae0-6234-0ce0-94a751e85efd",
           "request": {
             "method": "POST",
             "header": [
@@ -5690,13 +5670,11 @@
               "query": [
                 {
                   "key": "payment_id",
-                  "value": "{{payment_id}}",
-                  "equals": true
+                  "value": "{{payment_id}}"
                 },
                 {
                   "key": "amount",
-                  "value": "2000",
-                  "equals": true
+                  "value": "2000"
                 }
               ]
             },
@@ -5705,7 +5683,6 @@
           "response": []
         },
         {
-          "_postman_id": "59696d64-fb2b-53c5-7b1f-eb919612dccf",
           "name": "Create bank account refund (escrow)",
           "event": [
             {
@@ -5721,6 +5698,7 @@
               }
             }
           ],
+          "_postman_id": "59696d64-fb2b-53c5-7b1f-eb919612dccf",
           "request": {
             "method": "POST",
             "header": [
@@ -5833,6 +5811,8 @@
           ]
         }
       ],
+      "_postman_id": "3b6a6aff-d50f-7501-5882-a6a8d46a37d2",
+      "description": "This model shows how a marketplace can escrow transactions.\n\nIn this model, Marketplaces:\n\n- Can escrow values up to 180 days after authorization;\n- Refund transactions under escrow, even when a receivers doesn't have balance;\n\n![EscrowExample](https://lh6.googleusercontent.com/0GxIsOjzETNaR4GoMZ6J7sBWb2r-omjTEqWiaIk_-eB9pgJ38W8eBFwK8bTQrFRdNypt4xJL6KwiHMMfGG-O=w2560-h1452-rw)\n\nThis chart above shows an example of how the escrow feature works from a transactional perspective.",
       "event": [
         {
           "listen": "prerequest",
@@ -5857,12 +5837,9 @@
       ]
     },
     {
-      "_postman_id": "594db053-3ab7-70b5-9bba-884d2995b9dd",
       "name": "Model 6 - Split with multiorder (shared cart)",
-      "description": "In this model a marketplace can create multiple orders through a shared cart and specify different receivers for each order.\n\nThe authentication used must be always the marketplace's, and it can define the a `feePayor` for each order.\n",
       "item": [
         {
-          "_postman_id": "42d45bec-182a-d3f1-904a-3954475b78d2",
           "name": "Create a multiorder",
           "event": [
             {
@@ -5878,6 +5855,7 @@
               }
             }
           ],
+          "_postman_id": "42d45bec-182a-d3f1-904a-3954475b78d2",
           "request": {
             "method": "POST",
             "header": [
@@ -5996,7 +5974,6 @@
           ]
         },
         {
-          "_postman_id": "28b1c7df-13a9-c1c0-97a2-6812b948b814",
           "name": "Create a multipayment",
           "event": [
             {
@@ -6016,6 +5993,7 @@
               }
             }
           ],
+          "_postman_id": "28b1c7df-13a9-c1c0-97a2-6812b948b814",
           "request": {
             "method": "POST",
             "header": [
@@ -6128,7 +6106,6 @@
           ]
         },
         {
-          "_postman_id": "9a1b2815-6920-87ad-9c1b-6a00bde0ecec",
           "name": "Create 2nd multiorder",
           "event": [
             {
@@ -6144,6 +6121,7 @@
               }
             }
           ],
+          "_postman_id": "9a1b2815-6920-87ad-9c1b-6a00bde0ecec",
           "request": {
             "method": "POST",
             "header": [
@@ -6262,7 +6240,6 @@
           ]
         },
         {
-          "_postman_id": "52c3eeed-a345-a0a8-221a-eac6ecedee3e",
           "name": "Create a boleto multipayment",
           "event": [
             {
@@ -6282,6 +6259,7 @@
               }
             }
           ],
+          "_postman_id": "52c3eeed-a345-a0a8-221a-eac6ecedee3e",
           "request": {
             "method": "POST",
             "header": [
@@ -6393,15 +6371,14 @@
             }
           ]
         }
-      ]
+      ],
+      "_postman_id": "594db053-3ab7-70b5-9bba-884d2995b9dd",
+      "description": "In this model a marketplace can create multiple orders through a shared cart and specify different receivers for each order.\n\nThe authentication used must be always the marketplace's, and it can define the a `feePayor` for each order.\n"
     },
     {
-      "_postman_id": "f5207bde-fac8-d396-f518-91cbf4e841d0",
       "name": "Model 7 - Split with multiorder (shared cart) with escrow",
-      "description": "This model combines the shared cart with escrow.",
       "item": [
         {
-          "_postman_id": "d494894d-c2b2-1935-00ec-59460be07970",
           "name": "Create a multiorder",
           "event": [
             {
@@ -6417,6 +6394,7 @@
               }
             }
           ],
+          "_postman_id": "d494894d-c2b2-1935-00ec-59460be07970",
           "request": {
             "method": "POST",
             "header": [
@@ -6535,7 +6513,6 @@
           ]
         },
         {
-          "_postman_id": "6548a0c5-9a18-94d5-e987-707a8b187f0c",
           "name": "Create a multipayment",
           "event": [
             {
@@ -6559,6 +6536,7 @@
               }
             }
           ],
+          "_postman_id": "6548a0c5-9a18-94d5-e987-707a8b187f0c",
           "request": {
             "method": "POST",
             "header": [
@@ -6671,7 +6649,6 @@
           ]
         },
         {
-          "_postman_id": "d78e32de-9c46-34e8-cd3c-85371cfd3d7c",
           "name": "Release escrow (individual)",
           "event": [
             {
@@ -6684,6 +6661,7 @@
               }
             }
           ],
+          "_postman_id": "d78e32de-9c46-34e8-cd3c-85371cfd3d7c",
           "request": {
             "method": "POST",
             "header": [
@@ -6795,15 +6773,14 @@
             }
           ]
         }
-      ]
+      ],
+      "_postman_id": "f5207bde-fac8-d396-f518-91cbf4e841d0",
+      "description": "This model combines the shared cart with escrow."
     },
     {
-      "_postman_id": "49f96d2d-3f24-3496-fa25-02003d62d755",
       "name": "Model 8 - Split with multiorder (shared cart) and secondary as feePayor",
-      "description": "In this model a marketplace using a shared cart specifies who is the `feePayor`.\n\nIMPORTANT:\n\nThe authentication is still the marketplace's.",
       "item": [
         {
-          "_postman_id": "afc65d0a-4f30-7284-85fe-654164688e87",
           "name": "Create a multiorder",
           "event": [
             {
@@ -6819,6 +6796,7 @@
               }
             }
           ],
+          "_postman_id": "afc65d0a-4f30-7284-85fe-654164688e87",
           "request": {
             "method": "POST",
             "header": [
@@ -6931,7 +6909,6 @@
           ]
         },
         {
-          "_postman_id": "14a9c9ac-c613-2713-e285-cd8e13475997",
           "name": "Create a multipayment",
           "event": [
             {
@@ -6951,6 +6928,7 @@
               }
             }
           ],
+          "_postman_id": "14a9c9ac-c613-2713-e285-cd8e13475997",
           "request": {
             "method": "POST",
             "header": [
@@ -7057,7 +7035,6 @@
           ]
         },
         {
-          "_postman_id": "1eb654ba-45a3-3ed2-003b-f20d9d7ade5b",
           "name": "Create 2nd multiorder",
           "event": [
             {
@@ -7073,6 +7050,7 @@
               }
             }
           ],
+          "_postman_id": "1eb654ba-45a3-3ed2-003b-f20d9d7ade5b",
           "request": {
             "method": "POST",
             "header": [
@@ -7185,7 +7163,6 @@
           ]
         },
         {
-          "_postman_id": "712d5b74-0b7e-c042-ba73-08c8e7f599c8",
           "name": "Create a boleto multipayment",
           "event": [
             {
@@ -7205,6 +7182,7 @@
               }
             }
           ],
+          "_postman_id": "712d5b74-0b7e-c042-ba73-08c8e7f599c8",
           "request": {
             "method": "POST",
             "header": [
@@ -7310,15 +7288,14 @@
             }
           ]
         }
-      ]
+      ],
+      "_postman_id": "49f96d2d-3f24-3496-fa25-02003d62d755",
+      "description": "In this model a marketplace using a shared cart specifies who is the `feePayor`.\n\nIMPORTANT:\n\nThe authentication is still the marketplace's."
     },
     {
-      "_postman_id": "8db3652d-8078-d297-6fdc-a8e4c4cdd0a0",
       "name": "Payout and withdrawal",
-      "description": "",
       "item": [
         {
-          "_postman_id": "1a195384-414d-4f49-9e57-c3c5fb78e5fe",
           "name": "Create a bank account",
           "event": [
             {
@@ -7331,6 +7308,7 @@
               }
             }
           ],
+          "_postman_id": "1a195384-414d-4f49-9e57-c3c5fb78e5fe",
           "request": {
             "method": "POST",
             "header": [
@@ -7443,7 +7421,6 @@
           ]
         },
         {
-          "_postman_id": "80105aec-0460-0b22-0a64-b26e7421b811",
           "name": "Transfer balance to a bank account",
           "event": [
             {
@@ -7456,6 +7433,7 @@
               }
             }
           ],
+          "_postman_id": "80105aec-0460-0b22-0a64-b26e7421b811",
           "request": {
             "method": "POST",
             "header": [
@@ -7476,7 +7454,8 @@
           },
           "response": []
         }
-      ]
+      ],
+      "_postman_id": "8db3652d-8078-d297-6fdc-a8e4c4cdd0a0"
     }
   ],
   "event": [
